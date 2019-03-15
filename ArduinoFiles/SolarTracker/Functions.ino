@@ -5,24 +5,26 @@ void ReadSensors ()
   SLValues[Index] = analogRead (SL) / 4;
   SRValues[Index] = analogRead (SR) / 4;
   STValues[Index] = analogRead (ST) / 4;
+  SBValues[Index] = analogRead (SB) / 4;
   
   SLAvg = 0;
   SRAvg = 0;
   STAvg = 0;
+  SBAvg = 0;
 
   for (int i; i < Samples; i++)
   {
     SLAvg = SLAvg + SLValues[i];
     SRAvg = SRAvg + SRValues[i];
     STAvg = STAvg + STValues[i];
+    SBAvg = SBAvg + SBValues[i];
   }
   SLAvg /= Samples;
   SRAvg /= Samples;
   STAvg /= Samples;
-  SBAvg = SLAvg + SRAvg;
-  SBAvg /= 2;
-  SAvg = SLAvg + SRAvg + STAvg;
-  SAvg /= 3;
+  SBAvg /= Samples;
+  SAvg = SLAvg + SRAvg + STAvg + SBAvg;
+  SAvg /= 4;
 }
 
 void DirectDrive () // For driving transistors and/or relays.

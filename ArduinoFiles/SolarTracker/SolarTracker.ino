@@ -1,12 +1,13 @@
 #include <EEPROM.h>
 
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
-// This is Version: 0.1
+// This is Version: 0.2
 
 // Pins
 int SL = A0; // Left sensor
 int SR = A1; // Right sensor
 int ST = A2; // Top sensor
+int SB = A3; // Bottom sensor
 int LEFT = 2;
 int UP = 4;
 int DOWN = 7;
@@ -25,11 +26,12 @@ int Index = Samples - 1;
 unsigned int SLAvg; // Averaged Left sensor value (Measured)
 unsigned int SRAvg; // Averaged Right sensor value (Measured)
 unsigned int STAvg; // Averaged Top sensor value (Measured)
-unsigned int SBAvg; // Averaged Bottom sensor value (Calculated)
+unsigned int SBAvg; // Averaged Bottom sensor value (Measured)
 unsigned int SAvg; // Overall brightness (Calculated)
 byte SLValues[128];
 byte SRValues[128];
 byte STValues[128];
+byte SBValues[128];
 
 // Functions
 void ReadSensors ();
@@ -54,6 +56,7 @@ void setup()
     SLValues[0] = analogRead (SL) / 4;
     SRValues[0] = analogRead (SR) / 4;
     STValues[0] = analogRead (ST) / 4;
+    SBValues[0] = analogRead (SB) / 4;
   }
 
   for (int i; i < Samples; i++)
@@ -67,6 +70,10 @@ void setup()
   for (int i; i < Samples; i++)
   {
     STValues[i] = analogRead (ST) / 4;
+  }
+  for (int i; i < Samples; i++)
+  {
+    SBValues[i] = analogRead (SB) / 4;
   }
   Serial.begin (115200);
 }
