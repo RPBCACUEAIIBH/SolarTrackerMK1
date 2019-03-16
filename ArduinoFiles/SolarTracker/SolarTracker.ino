@@ -1,6 +1,6 @@
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
 // Made primarily for Arduino nano and pro mini.(The new versions of pro mini that has A6 and A7 available, but if PWM speed control is not required any older version will do as those pins only read motor speed settings from pots...)
-// This is Version: 0.3 (not fully tested)
+// This is Version: 0.4 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -59,12 +59,14 @@ String Sleeping;
 String LRTurn;
 String UDTurn;
 boolean DisplayString = false;
+byte Hysteresis = 4; // This(and averaging lots of samples) makes absolutely sure that the relays do not get destroyed by fast switching on and off.
+boolean Sleepiness = false; // Sleep-Auto mode hysteresis...
 
 // Functions
-void ReadInterface ();
-void ReadSensors ();
-void DirectDrive ();
-void DataStream ();
+void ReadInterface (); // Logic
+void ReadSensors (); // Logic
+void Motion (); // Logic
+void DataStream (); // Debug
 
 
 void setup()
@@ -143,7 +145,7 @@ void loop()
   Index %= Samples;
   ReadInterface ();
   ReadSensors ();
-  DirectDrive ();
+  Motion ();
   DataStream ();
   Cycle += 1;
   Cycle %= 512;

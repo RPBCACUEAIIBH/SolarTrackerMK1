@@ -18,7 +18,19 @@ void ReadInterface ()
     UDSpeed = UDSpeed + UDSValues[i];
   }
   Threshold /= Samples;
+  if (Threshold <= 254 - Hysteresis)
+  {
+    Threshold = Threshold + Hysteresis + 1;
+  }
+  if (Threshold < Hysteresis * 3)
+  {
+    Threshold = Hysteresis * 3;
+  }
   NightMode /= Samples;
+  if (Sleepiness == true && NightMode <= 255)
+  {
+    NightMode = NightMode + Hysteresis;
+  }
   LRSpeed /= Samples;
   UDSpeed /= Samples;
   
@@ -79,7 +91,7 @@ void ReadSensors ()
   SAvg /= 4;
 }
 
-void DirectDrive () // For driving transistors and/or relays.
+void Motion () // For driving transistors and/or relays.
 {
   if (SAvg >= NightMode && AutoPositioning == HIGH) // AutoMode
   {
@@ -91,7 +103,7 @@ void DirectDrive () // For driving transistors and/or relays.
     {
       digitalWrite (RIGHT, HIGH);
     }
-    else
+    else if (SRAvg < SLAvg + Threshold - Hysteresis)
     {
       digitalWrite (RIGHT, LOW);
     }
@@ -100,7 +112,7 @@ void DirectDrive () // For driving transistors and/or relays.
     {
       digitalWrite (LEFT, HIGH);
     }
-    else
+    else if (SLAvg < SRAvg + Threshold - Hysteresis)
     {
       digitalWrite (LEFT, LOW);
     }
@@ -109,7 +121,7 @@ void DirectDrive () // For driving transistors and/or relays.
     {
       digitalWrite (UP, HIGH);
     }
-    else
+    else if (STAvg < SBAvg + Threshold - Hysteresis)
     {
       digitalWrite (UP, LOW);
     }
@@ -118,15 +130,16 @@ void DirectDrive () // For driving transistors and/or relays.
     {
       digitalWrite (DOWN, HIGH);
     }
-    else
+    else if (SBAvg < STAvg + Threshold - Hysteresis)
     {
       digitalWrite (DOWN, LOW);
     }
     digitalWrite (SLEEP, LOW);
+    Sleepiness = false;
   }
   else if (AutoPositioning == LOW) // ManualMode
   {
-    if (Cycle < 256) // Blinking sleep indicator LED to indicate manual mode...
+    if (Cycle % 64 < 32 ) // Blinking sleep indicator LED to indicate manual mode...
     {
       digitalWrite (SLEEP, HIGH);
     }
@@ -183,180 +196,6 @@ void DirectDrive () // For driving transistors and/or relays.
     digitalWrite (UP, LOW);
     digitalWrite (RIGHT, LOW);
     digitalWrite (SLEEP, HIGH);
-  }
-}
-
-void DataStream ()
-{
-  switch (Cycle)
-  {
-    case 0: Sleeping = "(Zzz)";
-    break;
-    case 64: Sleeping = "(ZZz)";
-    break;
-    case 128: Sleeping = "(ZZZ)";
-    break;
-    case 192: Sleeping = "(ZZz)";
-    break;
-    case 256: Sleeping = "(Zzz)";
-    break;
-    case 320: Sleeping = "(ZZz)";
-    break;
-    case 384: Sleeping = "(ZZZ)";
-    break;
-    case 448: Sleeping = "(ZZz)";
-    break;
-  }
-
-  switch (Cycle)
-  {
-    case 0: Active = "(*  )";
-    break;
-    case 64: Active = "( * )";
-    break;
-    case 128: Active = "(  *)";
-    break;
-    case 192: Active = "( * )";
-    break;
-    case 256: Active = "(*  )";
-    break;
-    case 320: Active = "( * )";
-    break;
-    case 384: Active = "(  *)";
-    break;
-    case 448: Active = "( * )";
-    break;
-  }
-  
-  if (AutoPositioning == LOW)
-  { 
-    // Turn RIGHT Simulation
-    if (ManLeft[0] == HIGH && ManUp[0] == HIGH && ManDown[0] == HIGH && ManRight[0] == HIGH)
-    {
-      if (SRAvg >= SLAvg + Threshold) // Turn RIGHT Simulation
-      {
-        LRTurn = " R ";
-      }
-      else if (SLAvg >= SRAvg + Threshold) // Turn LEFT Simulation
-      {
-        LRTurn = " L ";
-      }
-      else
-      {
-        LRTurn = " S ";
-      }
-      if (STAvg >= SBAvg + Threshold) // Turn UP Simulation
-      {
-        UDTurn = " U ";
-      }
-      else if (SBAvg >= STAvg + Threshold) // Turn DOWN Simulation
-      {
-        UDTurn = " D ";
-      }
-      else
-      {
-        UDTurn = " S ";
-      }
-    }
-    else
-    {
-      if (ManRight[0] == LOW && ManLeft[0] != LOW) // Turn RIGHT
-      {
-        LRTurn = " MR";
-      }
-      else if (ManLeft[0] == LOW && ManRight[0] != LOW) // Turn LEFT
-      {
-        LRTurn = " ML";
-      }
-      else
-      {
-        LRTurn = " MS";
-      }
-      if (ManUp[0] == LOW && ManDown[0] != LOW) // Turn UP
-      {
-        UDTurn = " MU";
-      }
-      else if (ManDown[0] == LOW && ManUp[0] != LOW) // Turn DOWN
-      {
-        UDTurn = " MD";
-      }
-      else
-      {
-        UDTurn = " MS";
-      }
-    }
-    
-    Serial.print ("AP: Off");
-    Serial.print (";   ");
-    Serial.print ("Light: ");
-    if (SAvg < 100) Serial.print ("0");
-    if (SAvg < 10) Serial.print ("0");
-    Serial.print (SAvg);
-    Serial.print ("; ");
-    Serial.print ("Min Light: ");
-    if (NightMode < 100) Serial.print ("0");
-    if (NightMode < 10) Serial.print ("0");
-    Serial.print (NightMode);
-    Serial.print (" >> ");
-    if (SAvg < NightMode)
-    {
-      if (ManLeft[0] == HIGH && ManUp[0] == HIGH && ManDown[0] == HIGH && ManRight[0] == HIGH)
-      {
-        LRTurn = "n/a";
-        UDTurn = "n/a";
-      }
-      Serial.print (Sleeping);
-    }
-    else
-    {
-      Serial.print (Active);
-    }
-    Serial.print (";   ");
-    Serial.print ("Sensor values: ");
-    if (SLAvg < 100) Serial.print ("0");
-    if (SLAvg < 10) Serial.print ("0");
-    Serial.print (SLAvg);
-    Serial.print ("(L) ");
-    if (SRAvg < 100) Serial.print ("0");
-    if (SRAvg < 10) Serial.print ("0");
-    Serial.print (SRAvg);
-    Serial.print ("(R) ");
-    if (STAvg < 100) Serial.print ("0");
-    if (STAvg < 10) Serial.print ("0");
-    Serial.print (STAvg);
-    Serial.print ("(T) ");
-    if (SBAvg < 100) Serial.print ("0");
-    if (SBAvg < 10) Serial.print ("0");
-    Serial.print (SBAvg);
-    Serial.print ("(B) ");
-    Serial.print (">> ");
-    Serial.print (LRTurn);
-    Serial.print (" ");
-    Serial.print (UDTurn);
-    Serial.print (";   ");
-    Serial.print ("Threshold: ");
-    if (Threshold < 100) Serial.print ("0");
-    if (Threshold < 10) Serial.print ("0");
-    Serial.print (Threshold);
-    Serial.print ("; ");
-    Serial.print ("LRSpeed: ");
-    if (LRSpeed < 100) Serial.print ("0");
-    if (LRSpeed < 10) Serial.print ("0");
-    Serial.print (LRSpeed);
-    Serial.print ("; ");
-    Serial.print ("UDSpeed: ");
-    if (UDSpeed < 100) Serial.print ("0");
-    if (UDSpeed < 10) Serial.print ("0");
-    Serial.print (UDSpeed);
-    Serial.println ("");
-    DisplayString = true;
-  }
-  else
-  {
-    if (DisplayString == true)
-    {
-      Serial.println ("AP: On");
-    }
-    DisplayString = false;
+    Sleepiness = true;
   }
 }
