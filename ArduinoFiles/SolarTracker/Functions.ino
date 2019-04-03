@@ -101,38 +101,94 @@ void Motion () // For driving transistors and/or relays.
     // Turn RIGHT
     if (SRAvg >= SLAvg + Threshold)
     {
-      digitalWrite (RIGHT, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
+      else
+      {
+        digitalWrite (RIGHT, LOW);
+      }
     }
     else if (SRAvg < SLAvg + Threshold - Hysteresis)
     {
-      digitalWrite (RIGHT, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, LOW);
+      }
+      else
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
     }
     // Turn LEFT
     if (SLAvg >= SRAvg + Threshold)
     {
-      digitalWrite (LEFT, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, HIGH);
+      }
+      else
+      {
+        digitalWrite (LEFT, LOW);
+      }
     }
     else if (SLAvg < SRAvg + Threshold - Hysteresis)
     {
-      digitalWrite (LEFT, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, LOW);
+      }
+      else
+      {
+        digitalWrite (LEFT, HIGH);
+      }
     }
     // Turn UP
     if (STAvg >= SBAvg + Threshold)
     {
-      digitalWrite (UP, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, HIGH);
+      }
+      else
+      {
+        digitalWrite (UP, LOW);
+      }
     }
     else if (STAvg < SBAvg + Threshold - Hysteresis)
     {
-      digitalWrite (UP, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, LOW);
+      }
+      else
+      {
+        digitalWrite (UP, HIGH);
+      }
     }
     // Turn DOWN
     if (SBAvg >= STAvg + Threshold)
     {
-      digitalWrite (DOWN, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, HIGH);
+      }
+      else
+      {
+        digitalWrite (DOWN, LOW);
+      }
     }
     else if (SBAvg < STAvg + Threshold - Hysteresis)
     {
-      digitalWrite (DOWN, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, LOW);
+      }
+      else
+      {
+        digitalWrite (DOWN, HIGH);
+      }
     }
     digitalWrite (SLEEP, LOW);
     Sleepiness = false;
@@ -153,48 +209,114 @@ void Motion () // For driving transistors and/or relays.
     // Turn RIGHT
     if (ManRight[0] == LOW && ManLeft[0] != LOW)
     {
-      digitalWrite (RIGHT, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
+      else
+      {
+        digitalWrite (RIGHT, LOW);
+      }
     }
     else
     {
-      digitalWrite (RIGHT, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, LOW);
+      }
+      else
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
     }
     // Turn LEFT
     if (ManLeft[0] == LOW && ManRight[0] != LOW)
     {
-      digitalWrite (LEFT, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, HIGH);
+      }
+      else
+      {
+        digitalWrite (LEFT, LOW);
+      }
     }
     else
     {
-      digitalWrite (LEFT, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, LOW);
+      }
+      else
+      {
+        digitalWrite (LEFT, HIGH);
+      }
     }
     // Turn UP
     if (ManUp[0] == LOW && ManDown[0] != LOW)
     {
-      digitalWrite (UP, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, HIGH);
+      }
+      else
+      {
+        digitalWrite (UP, LOW);
+      }
     }
     else
     {
-      digitalWrite (UP, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, LOW);
+      }
+      else
+      {
+        digitalWrite (UP, HIGH);
+      }
     }
     // Turn DOWN
     if (ManDown[0] == LOW && ManUp[0] != LOW)
     {
-      digitalWrite (DOWN, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, HIGH);
+      }
+      else
+      {
+        digitalWrite (DOWN, LOW);
+      }
     }
     else
     {
-      digitalWrite (DOWN, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, LOW);
+      }
+      else
+      {
+        digitalWrite (DOWN, HIGH);
+      }
     }
   }
   else // Night Mode
   {
     digitalWrite (LRSPEED, LOW);
     digitalWrite (UDSPEED, LOW);
-    digitalWrite (LEFT, LOW);
-    digitalWrite (DOWN, LOW);
-    digitalWrite (UP, LOW);
-    digitalWrite (RIGHT, LOW);
+    if (LowActiveRelays == false)
+    {
+      digitalWrite (LEFT, LOW);
+      digitalWrite (DOWN, LOW);
+      digitalWrite (UP, LOW);
+      digitalWrite (RIGHT, LOW);
+    }
+    else
+    {
+      digitalWrite (LEFT, HIGH);
+      digitalWrite (DOWN, HIGH);
+      digitalWrite (UP, HIGH);
+      digitalWrite (RIGHT, HIGH);
+    }
     digitalWrite (SLEEP, HIGH);
     Sleepiness = true;
   }

@@ -1,6 +1,6 @@
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
 // Made primarily for Arduino nano and pro mini.(The new versions of pro mini that has A6 and A7 available, but if PWM speed control is not required any older version will do as those pins only read motor speed settings from pots...)
-// This is Version: 0.4 (not fully tested)
+// This is Version: 0.4.1 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -27,6 +27,7 @@ int MANRIGHT = 12; // Right turn button for manual positioning (Optional, but hi
 
 // Constants
 byte Samples = 128; // Valid range: 1 - 128 (128 is the maximum number of 8 bit samples that can be averaged in an integer value... Higher sample size is more accurate, but less responsive... )
+boolean LowActiveRelays = true; // If your relays are activated when you pull the pin low, it should be set to true. (true is default cause it's made for someone using low active relays module...)
 
 // Variables
 boolean AutoPositioning = HIGH;
@@ -83,10 +84,20 @@ void setup()
   pinMode (AUTO, INPUT_PULLUP);
   pinMode (MANDOWN, INPUT_PULLUP);
   pinMode (MANRIGHT, INPUT_PULLUP);
-  digitalWrite (LEFT, LOW);
-  digitalWrite (DOWN, LOW);
-  digitalWrite (UP, LOW);
-  digitalWrite (RIGHT, LOW);
+  if (LowActiveRelays == false)
+  {
+    digitalWrite (LEFT, LOW);
+    digitalWrite (DOWN, LOW);
+    digitalWrite (UP, LOW);
+    digitalWrite (RIGHT, LOW);
+  }
+  else
+  {
+    digitalWrite (LEFT, HIGH);
+    digitalWrite (DOWN, HIGH);
+    digitalWrite (UP, HIGH);
+    digitalWrite (RIGHT, HIGH);
+  }
   digitalWrite (SLEEP, LOW);
   digitalWrite (LRSPEED, LOW);
   digitalWrite (UDSPEED, LOW);
