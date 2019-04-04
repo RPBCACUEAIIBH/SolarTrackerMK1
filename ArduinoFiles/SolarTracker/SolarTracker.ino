@@ -1,6 +1,6 @@
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
 // Made primarily for Arduino nano and pro mini.(The new versions of pro mini that has A6 and A7 available, but if PWM speed control is not required any older version will do as those pins only read motor speed settings from pots...)
-// This is Version: 0.4.2 (not fully tested)
+// This is Version: 0.4.3 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -27,7 +27,8 @@ int MANRIGHT = 12; // Right turn button for manual positioning (Optional, but hi
 
 // Constants
 byte Samples = 128; // Valid range: 1 - 128 (128 is the maximum number of 8 bit samples that can be averaged in an integer value... Higher sample size is more accurate, but less responsive... )
-boolean LowActiveRelays = false; // If your relays are activated when you pull the pin low, it should be set to true.
+boolean LowActiveRelays = true; // If your relays are activated when you pull the pin low, it should be set to true otherwise it should be set to false.
+byte Hysteresis = 1; // This(and averaging lots of samples) makes absolutely sure that the relays do not get destroyed by fast switching on and off.
 
 // Variables
 boolean AutoPositioning = HIGH;
@@ -60,7 +61,6 @@ String Sleeping;
 String LRTurn;
 String UDTurn;
 boolean DisplayString = false;
-byte Hysteresis = 4; // This(and averaging lots of samples) makes absolutely sure that the relays do not get destroyed by fast switching on and off.
 boolean Sleepiness = false; // Sleep-Auto mode hysteresis...
 
 // Functions
