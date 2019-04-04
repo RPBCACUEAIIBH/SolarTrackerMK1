@@ -1,7 +1,67 @@
+void ReadInterface ()
+{
+  TValues[Index] = analogRead (TP) / 4;
+  NMValues[Index] = analogRead (NMP) / 4;
+  SValues[Index] = analogRead (SPEEDP) / 4;
+  
+  Threshold = 0;
+  NightMode = 0;
+  Speed = 0;
+  
+  for (int i; i < Samples; i++)
+  {
+    Threshold = Threshold + TValues[i];
+    NightMode = NightMode + NMValues[i];
+    Speed = Speed + SValues[i];
+  }
+  Threshold /= Samples;
+  if (Threshold <= 254 - Hysteresis)
+  {
+    Threshold = Threshold + Hysteresis + 1;
+  }
+  if (Threshold < Hysteresis * 3)
+  {
+    Threshold = Hysteresis * 3;
+  }
+  NightMode /= Samples;
+  if (Sleepiness == true && NightMode <= 255)
+  {
+    NightMode = NightMode + Hysteresis;
+  }
+  Speed /= Samples;
+  
+  ManLeft[1] = ManLeft[0];
+  ManLeft[0] = digitalRead (MANLEFT);
+  ManUp[1] = ManUp[0];
+  ManUp[0] = digitalRead (MANUP);
+  Auto[1] = Auto[0];
+  Auto[0] = digitalRead (AUTO);
+  ManDown[1] = ManDown[0];
+  ManDown[0] = digitalRead (MANDOWN);
+  ManRight[1] = ManRight[0];
+  ManRight[0] = digitalRead (MANRIGHT);
+
+  if (ManLeft[0] != ManLeft[1] || ManUp[0] != ManUp[1] || Auto[0] != Auto[1] || ManDown[0] != ManDown[1] || ManRight[0] != ManRight[1]) // Debouncing buttons
+  {
+    delay (5);
+    ManLeft[0] = digitalRead (MANLEFT);
+    ManUp[0] = digitalRead (MANUP);
+    Auto[0] = digitalRead (AUTO);
+    ManDown[0] = digitalRead (MANDOWN);
+    ManRight[0] = digitalRead (MANRIGHT);
+  }
+
+  if (ManLeft[0] == LOW || ManUp[0] == LOW || ManDown[0] == LOW || ManRight[0] == LOW) // You can't be in manual and automatic mode at the same time, it could potentially burn something...
+  {
+    AutoPositioning = LOW;
+    Auto[0] = HIGH;
+  }
+  if (Auto[0] == LOW && Auto[1] == HIGH && AutoPositioning == LOW) AutoPositioning = HIGH;
+  else if (Auto[0] == LOW && Auto[1] == HIGH && AutoPositioning == HIGH) AutoPositioning = LOW;
+}
+
 void ReadSensors ()
 {
-  Index += 1;
-  Index %= Samples;
   SLValues[Index] = analogRead (SL) / 4;
   SRValues[Index] = analogRead (SR) / 4;
   STValues[Index] = analogRead (ST) / 4;
@@ -25,73 +85,230 @@ void ReadSensors ()
   SAvg /= 3;
 }
 
-void DirectDrive () // For driving transistors and/or relays.
+void Motion () // For driving transistors and/or relays.
 {
-  if (SAvg >= NightMode)
+  if (SAvg >= NightMode && AutoPositioning == HIGH) // AutoMode
   {
+    analogWrite (SPEED, Speed);
     // Overcast (Periodic search not yet implemented...)
     // Turn RIGHT
     if (SRAvg >= SLAvg + Threshold)
     {
-      digitalWrite (RIGHT, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
+      else
+      {
+        digitalWrite (RIGHT, LOW);
+      }
     }
-    else
+    else if (SRAvg < SLAvg + Threshold - Hysteresis)
     {
-      digitalWrite (RIGHT, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, LOW);
+      }
+      else
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
     }
     // Turn LEFT
     if (SLAvg >= SRAvg + Threshold)
     {
-      digitalWrite (LEFT, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, HIGH);
+      }
+      else
+      {
+        digitalWrite (LEFT, LOW);
+      }
     }
-    else
+    else if (SLAvg < SRAvg + Threshold - Hysteresis)
     {
-      digitalWrite (LEFT, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, LOW);
+      }
+      else
+      {
+        digitalWrite (LEFT, HIGH);
+      }
     }
     // Turn UP
     if (STAvg >= SBAvg + Threshold)
     {
-      digitalWrite (UP, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, HIGH);
+      }
+      else
+      {
+        digitalWrite (UP, LOW);
+      }
     }
-    else
+    else if (STAvg < SBAvg + Threshold - Hysteresis)
     {
-      digitalWrite (UP, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, LOW);
+      }
+      else
+      {
+        digitalWrite (UP, HIGH);
+      }
     }
     // Turn DOWN
     if (SBAvg >= STAvg + Threshold)
     {
-      digitalWrite (DOWN, HIGH);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, HIGH);
+      }
+      else
+      {
+        digitalWrite (DOWN, LOW);
+      }
+    }
+    else if (SBAvg < STAvg + Threshold - Hysteresis)
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, LOW);
+      }
+      else
+      {
+        digitalWrite (DOWN, HIGH);
+      }
+    }
+    digitalWrite (SLEEP, LOW);
+    Sleepiness = false;
+  }
+  else if (AutoPositioning == LOW) // ManualMode
+  {
+    if (Cycle % 64 < 32 ) // Blinking sleep indicator LED to indicate manual mode...
+    {
+      digitalWrite (SLEEP, HIGH);
     }
     else
     {
-      digitalWrite (DOWN, LOW);
+      digitalWrite (SLEEP, LOW);
     }
-    digitalWrite (SLEEP, LOW);
-  }
-  else
-  {
-    digitalWrite (LEFT, LOW);
-    digitalWrite (DOWN, LOW);
-    digitalWrite (UP, LOW);
-    digitalWrite (RIGHT, LOW);
-    digitalWrite (SLEEP, HIGH);
-  }
-}
 
-void DataStream ()
-{
-  Serial.print ("SAvg: ");
-  Serial.print (SAvg);
-  Serial.print (" ");
-  Serial.print ("SLAvg: ");
-  Serial.print (SLAvg);
-  Serial.print (" ");
-  Serial.print ("SRAvg: ");
-  Serial.print (SRAvg);
-  Serial.print (" ");
-  Serial.print ("SBAvg: ");
-  Serial.print (SBAvg);
-  Serial.print (" ");
-  Serial.print ("STAvg: ");
-  Serial.println (STAvg);
+    analogWrite (SPEED, Speed);
+    // Turn RIGHT
+    if (ManRight[0] == LOW && ManLeft[0] != LOW)
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
+      else
+      {
+        digitalWrite (RIGHT, LOW);
+      }
+    }
+    else
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (RIGHT, LOW);
+      }
+      else
+      {
+        digitalWrite (RIGHT, HIGH);
+      }
+    }
+    // Turn LEFT
+    if (ManLeft[0] == LOW && ManRight[0] != LOW)
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, HIGH);
+      }
+      else
+      {
+        digitalWrite (LEFT, LOW);
+      }
+    }
+    else
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, LOW);
+      }
+      else
+      {
+        digitalWrite (LEFT, HIGH);
+      }
+    }
+    // Turn UP
+    if (ManUp[0] == LOW && ManDown[0] != LOW)
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, HIGH);
+      }
+      else
+      {
+        digitalWrite (UP, LOW);
+      }
+    }
+    else
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (UP, LOW);
+      }
+      else
+      {
+        digitalWrite (UP, HIGH);
+      }
+    }
+    // Turn DOWN
+    if (ManDown[0] == LOW && ManUp[0] != LOW)
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, HIGH);
+      }
+      else
+      {
+        digitalWrite (DOWN, LOW);
+      }
+    }
+    else
+    {
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (DOWN, LOW);
+      }
+      else
+      {
+        digitalWrite (DOWN, HIGH);
+      }
+    }
+  }
+  else // Night Mode
+  {
+    digitalWrite (SPEED, LOW);
+    if (LowActiveRelays == false)
+    {
+      digitalWrite (LEFT, LOW);
+      digitalWrite (DOWN, LOW);
+      digitalWrite (UP, LOW);
+      digitalWrite (RIGHT, LOW);
+    }
+    else
+    {
+      digitalWrite (LEFT, HIGH);
+      digitalWrite (DOWN, HIGH);
+      digitalWrite (UP, HIGH);
+      digitalWrite (RIGHT, HIGH);
+    }
+    digitalWrite (SLEEP, HIGH);
+    Sleepiness = true;
+  }
 }
