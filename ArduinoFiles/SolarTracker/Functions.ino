@@ -17,11 +17,11 @@ void ReadInterface ()
   Threshold /= Samples;
   if (Threshold <= 254 - Hysteresis)
   {
-    Threshold = Threshold + Hysteresis + 1;
+    Threshold = Threshold + Hysteresis;
   }
-  if (Threshold < Hysteresis * 3)
+  if (Threshold < Hysteresis)
   {
-    Threshold = Hysteresis * 3;
+    Threshold = Hysteresis;
   }
   NightMode /= Samples;
   if (Sleepiness == true && NightMode <= 255)

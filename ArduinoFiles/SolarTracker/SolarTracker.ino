@@ -1,5 +1,5 @@
 // This is slightly faster 3 sensor version, optimized for older arduino pro mini on which A6 and A7 isn't available, and for using least amount of parts which is more cost efficient for mass production...
-// This is Version: 0.2 (not fully tested)
+// This is Version: 0.2.1 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -24,7 +24,8 @@ int MANRIGHT = 12; // Right turn button for manual positioning (Optional, but hi
 
 // Constants
 byte Samples = 128; // Valid range: 1 - 128 (128 is the maximum number of 8 bit samples that can be averaged in an integer value... Higher sample size is more accurate, but less responsive... )
-boolean LowActiveRelays = false; // If your relays are activated when you pull the pin low, it should be set to true.
+boolean LowActiveRelays = false; // If your relays are activated when you pull the pin low, it should be set to true otherwise it should be set to false.
+byte Hysteresis = 1; // This(and averaging lots of samples) makes absolutely sure that the relays do not get destroyed by fast switching on and off.
 
 // Variables
 boolean AutoPositioning = HIGH;
@@ -54,7 +55,6 @@ String Sleeping;
 String LRTurn;
 String UDTurn;
 boolean DisplayString = false;
-byte Hysteresis = 4; // This(and averaging lots of samples) makes absolutely sure that the relays do not get destroyed by fast switching on and off.
 boolean Sleepiness = false; // Sleep-Auto mode hysteresis...
 
 // Functions
