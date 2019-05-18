@@ -1,34 +1,37 @@
 void ReadInterface ()
 {
-  TValues[Index] = analogRead (TP) / 4;
-  NMValues[Index] = analogRead (NMP) / 4;
-  SValues[Index] = analogRead (SPEEDP) / 4;
-  
-  Threshold = 0;
-  NightMode = 0;
-  Speed = 0;
-  
-  for (int i; i < Samples; i++)
+  if (SensitivityBoost == true && Boosted == true || SensitivityBoost == false)
   {
-    Threshold = Threshold + TValues[i];
-    NightMode = NightMode + NMValues[i];
-    Speed = Speed + SValues[i];
+    TValues[Index] = analogRead (TP) / 4;
+    NMValues[Index] = analogRead (NMP) / 4;
+    SValues[Index] = analogRead (SPEEDP) / 4;
+    
+    Threshold = 0;
+    NightMode = 0;
+    Speed = 0;
+    
+    for (int i; i < Samples; i++)
+    {
+      Threshold = Threshold + TValues[i];
+      NightMode = NightMode + NMValues[i];
+      Speed = Speed + SValues[i];
+    }
+    Threshold /= Samples;
+    if (Threshold <= 254 - Hysteresis)
+    {
+      Threshold = Threshold + Hysteresis;
+    }
+    if (Threshold < Hysteresis)
+    {
+      Threshold = Hysteresis;
+    }
+    NightMode /= Samples;
+    if (Sleepiness == true && NightMode <= 255)
+    {
+      NightMode = NightMode + Hysteresis;
+    }
+    Speed /= Samples;
   }
-  Threshold /= Samples;
-  if (Threshold <= 254 - Hysteresis)
-  {
-    Threshold = Threshold + Hysteresis;
-  }
-  if (Threshold < Hysteresis)
-  {
-    Threshold = Hysteresis;
-  }
-  NightMode /= Samples;
-  if (Sleepiness == true && NightMode <= 255)
-  {
-    NightMode = NightMode + Hysteresis;
-  }
-  Speed /= Samples;
   
   ManLeft[1] = ManLeft[0];
   ManLeft[0] = digitalRead (MANLEFT);
@@ -40,7 +43,7 @@ void ReadInterface ()
   ManDown[0] = digitalRead (MANDOWN);
   ManRight[1] = ManRight[0];
   ManRight[0] = digitalRead (MANRIGHT);
-
+  
   if (ManLeft[0] != ManLeft[1] || ManUp[0] != ManUp[1] || Auto[0] != Auto[1] || ManDown[0] != ManDown[1] || ManRight[0] != ManRight[1]) // Debouncing buttons
   {
     delay (5);
@@ -87,7 +90,7 @@ void ReadSensors ()
 
 void Motion () // For driving transistors and/or relays.
 {
-  if (SAvg >= NightMode && AutoPositioning == HIGH) // AutoMode
+  if (SensitivityBoost == true && SAvg >= NightMode && AutoPositioning == true && Boosted == true || SensitivityBoost == true && AutoPositioning == true && Boosted == false || SensitivityBoost == false && SAvg >= NightMode && AutoPositioning == true) // AutoMode
   {
     analogWrite (SPEED, Speed);
     // Overcast (Periodic search not yet implemented...)
@@ -310,5 +313,61 @@ void Motion () // For driving transistors and/or relays.
     }
     digitalWrite (SLEEP, HIGH);
     Sleepiness = true;
+  }
+}
+
+void Boost () // Sensitivity enhancement
+{
+  if (SensitivityBoost == true && SAvg <= 50 && Boosted == false) // 50 - Just below 1V
+  {
+    analogReference(INTERNAL);
+    Boosted = true;
+    // Flushing value hystory otherwise this may cause problems...
+    for (int i; i < Samples; i++) // discard a few readings...
+    {
+      SLValues[i] = analogRead (SL) / 4;
+      SRValues[i] = analogRead (SR) / 4;
+      STValues[i] = analogRead (ST) / 4;
+    }
+    SLAvg = 0;
+    SRAvg = 0;
+    STAvg = 0;
+    for (int i; i < Samples; i++)
+    {
+      SLAvg = SLAvg + SLValues[i];
+      SRAvg = SRAvg + SRValues[i];
+      STAvg = STAvg + STValues[i];
+    }
+    SLAvg /= Samples;
+    SRAvg /= Samples;
+    STAvg /= Samples;
+    SBAvg = SLAvg + SRAvg;
+    SBAvg /= 2;
+  }
+  else if (SensitivityBoost == true && SAvg >= 250 && Boosted == true) // - 245 - Just above 1.05V
+  {
+    analogReference(DEFAULT);
+    Boosted = false;
+    // Flushing value hystory otherwise this may cause problems...
+    for (int i; i < Samples; i++) // discard a few readings...
+    {
+      SLValues[i] = analogRead (SL) / 4;
+      SRValues[i] = analogRead (SR) / 4;
+      STValues[i] = analogRead (ST) / 4;
+    }
+    SLAvg = 0;
+    SRAvg = 0;
+    STAvg = 0;
+    for (int i; i < Samples; i++)
+    {
+      SLAvg = SLAvg + SLValues[i];
+      SRAvg = SRAvg + SRValues[i];
+      STAvg = STAvg + STValues[i];
+    }
+    SLAvg /= Samples;
+    SRAvg /= Samples;
+    STAvg /= Samples;
+    SBAvg = SLAvg + SRAvg;
+    SBAvg /= 2;
   }
 }
