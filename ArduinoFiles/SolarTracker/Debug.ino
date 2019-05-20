@@ -100,6 +100,16 @@ void DataStream ()
     
     Serial.print ("AP: Off");
     Serial.print (";   ");
+    if (Boosted == false)
+    {
+      Serial.print ("SB: Off");
+      Serial.print (";   ");
+    }
+    else
+    {
+      Serial.print ("SB: On ");
+      Serial.print (";   ");
+    }
     Serial.print ("Light: ");
     if (SAvg < 100) Serial.print ("0");
     if (SAvg < 10) Serial.print ("0");
@@ -110,7 +120,7 @@ void DataStream ()
     if (NightMode < 10) Serial.print ("0");
     Serial.print (NightMode);
     Serial.print (" >> ");
-    if (SAvg < NightMode)
+    if (SensitivityBoost == true && Boosted == true && SAvg < NightMode || SensitivityBoost == false && SAvg < NightMode)
     {
       if (ManLeft[0] == HIGH && ManUp[0] == HIGH && ManDown[0] == HIGH && ManRight[0] == HIGH)
       {
@@ -172,5 +182,13 @@ void DataStream ()
       Serial.println ("AP: On");
     }
     DisplayString = false;
+    if (SAvg <= 50 && Boosted == false)
+    {
+      Serial.println ("SB: On ");
+    }
+    else if (SAvg >= 250 && Boosted == true)
+    {
+      Serial.println ("SB: Off");
+    }
   }
 }

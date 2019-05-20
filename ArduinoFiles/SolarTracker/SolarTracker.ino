@@ -1,6 +1,6 @@
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
 // Made primarily for Arduino nano and pro mini.(The new versions of pro mini that has A6 and A7 available, but if PWM speed control is not required any older version will do as those pins only read motor speed settings from pots...)
-// This is Version: 0.4.3 (not fully tested)
+// This is Version: 0.5 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -29,6 +29,11 @@ int MANRIGHT = 12; // Right turn button for manual positioning (Optional, but hi
 byte Samples = 128; // Valid range: 1 - 128 (128 is the maximum number of 8 bit samples that can be averaged in an integer value... Higher sample size is more accurate, but less responsive... )
 boolean LowActiveRelays = true; // If your relays are activated when you pull the pin low, it should be set to true otherwise it should be set to false.
 byte Hysteresis = 1; // This(and averaging lots of samples) makes absolutely sure that the relays do not get destroyed by fast switching on and off.
+const boolean SensitivityBoost = true; // Sensitivity boost on/off (Advanced feature, this may require adjusting threshold, and night mode, and potmeters are only adjustable in low light conditions, but may improve low light tracking by switching between VCC and internal 1.1V reference.)
+const byte DefaultT = 10; // Default Threshold (Only relevant if Sensitivity boost is enabled!)
+const byte DefaultNM = 100; // Default NightMode (Only relevant if Sensitivity boost is enabled!)
+const byte DefaultLRS = 225; // Default Left-Right Speed (Only relevant if Sensitivity boost is enabled!)
+const byte DefaultUDS = 225; // Default Up-Down Speed (Only relevant if Sensitivity boost is enabled!)
 
 // Variables
 boolean AutoPositioning = HIGH;
@@ -62,16 +67,20 @@ String LRTurn;
 String UDTurn;
 boolean DisplayString = false;
 boolean Sleepiness = false; // Sleep-Auto mode hysteresis...
+boolean Boosted = false; // Sensitivity boost... (false = aref set to VCC, true = aref set to internal 1.1v)
 
 // Functions
 void ReadInterface (); // Logic
 void ReadSensors (); // Logic
 void Motion (); // Logic
 void DataStream (); // Debug
+void Boost (); // Enhancement
 
 
 void setup()
 {
+  delay (200);
+  analogReference(DEFAULT);
   pinMode (LEFT, OUTPUT);
   pinMode (DOWN, OUTPUT);
   pinMode (UP, OUTPUT);
@@ -130,30 +139,51 @@ void setup()
   {
     SBValues[i] = analogRead (SB) / 4;
   }
-  for (int i; i < Samples; i++)
+  if (SensitivityBoost == false) // If Sensitivity boost is enabled, default values are used, since the the potsmeters can only be properly read when sensitivity is boosted(in low light).
   {
-    TValues[i] = analogRead (TP) / 4;
+    for (int i; i < Samples; i++)
+    {
+      TValues[i] = analogRead (TP) / 4;
+    }
+    for (int i; i < Samples; i++)
+    {
+      NMValues[i] = analogRead (NMP) / 4;
+    }
+    for (int i; i < Samples; i++)
+    {
+      LRSValues[i] = analogRead (LRSPEEDP) / 4;
+    }
+    for (int i; i < Samples; i++)
+    {
+      UDSValues[i] = analogRead (UDSPEEDP) / 4;
+    }
   }
-  for (int i; i < Samples; i++)
+  else
   {
-    NMValues[i] = analogRead (NMP) / 4;
-  }
-  for (int i; i < Samples; i++)
-  {
-    LRSValues[i] = analogRead (LRSPEEDP) / 4;
-  }
-  for (int i; i < Samples; i++)
-  {
-    UDSValues[i] = analogRead (UDSPEEDP) / 4;
+    for (int i; i < Samples; i++)
+    {
+      TValues[i] = DefaultT;
+    }
+    for (int i; i < Samples; i++)
+    {
+      NMValues[i] = DefaultNM;
+    }
+    for (int i; i < Samples; i++)
+    {
+      LRSValues[i] = DefaultLRS;
+      UDSValues[i] = DefaultUDS;
+    }
   }
   Serial.begin (115200);
   Serial.println ("The display function slows down the execution, therefore it's only available in manual positioning mode. (Press the \"Auto\" button to toggle between Manual and Automatic mode.)");
+  if (SensitivityBoost == true) Serial.println ("!!! WARNING !!! Since sensitivity boost is enabled, potmeters are only adjustable in low light conditions! If that's a problem, then disable it and re-upload!");
 }
 
 void loop()
 {
   Index += 1;
   Index %= Samples;
+  Boost ();
   ReadInterface ();
   ReadSensors ();
   Motion ();
