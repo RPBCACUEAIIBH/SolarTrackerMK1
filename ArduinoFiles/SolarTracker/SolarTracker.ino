@@ -1,6 +1,6 @@
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
 // Made primarily for Arduino nano and pro mini.(The new versions of pro mini that has A6 and A7 available, but if PWM speed control is not required any older version will do as those pins only read motor speed settings from pots...)
-// This is Version: 0.5 (not fully tested)
+// This is Version: 0.5.1 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -34,6 +34,8 @@ const byte DefaultT = 10; // Default Threshold (Only relevant if Sensitivity boo
 const byte DefaultNM = 100; // Default NightMode (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultLRS = 225; // Default Left-Right Speed (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultUDS = 225; // Default Up-Down Speed (Only relevant if Sensitivity boost is enabled!)
+const boolean Return = true; // Returns to end position.
+const char ReturnDir = 'L'; // Which way to turn L/R when going to sleep.
 
 // Variables
 boolean AutoPositioning = HIGH;
