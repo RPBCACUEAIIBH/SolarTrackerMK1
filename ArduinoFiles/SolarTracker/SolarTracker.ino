@@ -1,5 +1,5 @@
 // This is slightly faster 3 sensor version, optimized for older arduino pro mini on which A6 and A7 isn't available, and for using least amount of parts which is more cost efficient for mass production...
-// This is Version: 0.3.0 (not fully tested)
+// This is Version: 0.3.1 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -30,6 +30,8 @@ const boolean SensitivityBoost = true; // Sensitivity boost on/off (Advanced fea
 const byte DefaultT = 10; // Default Threshold (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultNM = 100; // Default NightMode (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultS = 225; // Default Speed (Only relevant if Sensitivity boost is enabled!)
+const boolean Return = true; // Returns to end position.
+const char ReturnDir = 'L'; // Which way to turn L/R when going to sleep.
 
 // Variables
 boolean AutoPositioning = HIGH;

@@ -296,23 +296,66 @@ void Motion () // For driving transistors and/or relays.
   }
   else // Night Mode
   {
-    digitalWrite (SPEED, LOW);
-    if (LowActiveRelays == false)
+    if (Return == true && ReturnDir == 'L')
     {
-      digitalWrite (LEFT, LOW);
-      digitalWrite (DOWN, LOW);
-      digitalWrite (UP, LOW);
-      digitalWrite (RIGHT, LOW);
+      analogWrite (SPEED, Speed);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, HIGH);
+        digitalWrite (DOWN, HIGH);
+        digitalWrite (UP, LOW);
+        digitalWrite (RIGHT, LOW);
+      }
+      else
+      {
+        digitalWrite (LEFT, LOW);
+        digitalWrite (DOWN, LOW);
+        digitalWrite (UP, HIGH);
+        digitalWrite (RIGHT, HIGH);
+      }
+      digitalWrite (SLEEP, HIGH);
+      Sleepiness = true;
+    }
+    else if (Return == true)
+    {
+      analogWrite (SPEED, Speed);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, LOW);
+        digitalWrite (DOWN, HIGH);
+        digitalWrite (UP, LOW);
+        digitalWrite (RIGHT, HIGH);
+      }
+      else
+      {
+        digitalWrite (LEFT, HIGH);
+        digitalWrite (DOWN, LOW);
+        digitalWrite (UP, HIGH);
+        digitalWrite (RIGHT, LOW);
+      }
+      digitalWrite (SLEEP, HIGH);
+      Sleepiness = true;
     }
     else
     {
-      digitalWrite (LEFT, HIGH);
-      digitalWrite (DOWN, HIGH);
-      digitalWrite (UP, HIGH);
-      digitalWrite (RIGHT, HIGH);
+      digitalWrite (SPEED, LOW);
+      if (LowActiveRelays == false)
+      {
+        digitalWrite (LEFT, LOW);
+        digitalWrite (DOWN, LOW);
+        digitalWrite (UP, LOW);
+        digitalWrite (RIGHT, LOW);
+      }
+      else
+      {
+        digitalWrite (LEFT, HIGH);
+        digitalWrite (DOWN, HIGH);
+        digitalWrite (UP, HIGH);
+        digitalWrite (RIGHT, HIGH);
+      }
+      digitalWrite (SLEEP, HIGH);
+      Sleepiness = true;
     }
-    digitalWrite (SLEEP, HIGH);
-    Sleepiness = true;
   }
 }
 

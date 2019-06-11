@@ -124,8 +124,21 @@ void DataStream ()
     {
       if (ManLeft[0] == HIGH && ManUp[0] == HIGH && ManDown[0] == HIGH && ManRight[0] == HIGH)
       {
-        LRTurn = " S ";
-        UDTurn = " S ";
+        if (Return == true && ReturnDir == 'L')
+        {
+          LRTurn = " L ";
+          UDTurn = " D ";
+        }
+        else if (Return == true)
+        {
+          LRTurn = " R ";
+          UDTurn = " D ";
+        }
+        else
+        {
+          LRTurn = " S ";
+          UDTurn = " S ";
+        }
       }
       Serial.print (Sleeping);
       Sleepiness = true;
