@@ -30,7 +30,7 @@ const boolean SensitivityBoost = true; // Sensitivity boost on/off (Advanced fea
 const byte DefaultT = 10; // Default Threshold (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultNM = 100; // Default NightMode (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultS = 225; // Default Speed (Only relevant if Sensitivity boost is enabled!)
-const boolean Return = true; // Returns to end position.
+const boolean Return = false; // Returns to end position. (Inactive by default! This feature relies on the limit switches to stop the relays! If the switches are non-existent/broken, this may cause erratic behavior, and/or burn something!)
 const char ReturnDir = 'L'; // Which way to turn L/R when going to sleep.
 
 // Variables
