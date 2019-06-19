@@ -24,9 +24,13 @@ void ReadInterface ()
     Threshold = Hysteresis;
   }
   ThermalLimit /= Samples;
-  if (Sleepiness == true && ThermalLimit <= 255)
+  if (Sleepiness == true && ThermalLimit >= Hysteresis) // ThermalLimit is the inverse of the NightMode of the tracker...
   {
-    ThermalLimit = ThermalLimit + Hysteresis;
+    ThermalLimit = ThermalLimit - Hysteresis;
+  }
+  if (ThermalLimit < 2 * Threshold)
+  {
+    ThermalLimit = 2 * Threshold;
   }
   Speed /= Samples;
 }
@@ -50,7 +54,8 @@ void ReadSensors ()
 
 void Action ()
 {
-  if (SHAvg > STAvg + Threshold)
+  // Relay and speed switching
+  if (SHAvg >= STAvg + Threshold)
   {
     if (LowActiveRelays == false)
       digitalWrite(RELAY, HIGH);
@@ -58,7 +63,7 @@ void Action ()
       digitalWrite(RELAY, LOW);
     analogWrite(SPEED, Speed);
   }
-  else
+  else if (SHAvg < STAvg + Threshold - Hysteresis)
   {
     digitalWrite(SPEED, LOW);
     if (LowActiveRelays == false)
@@ -66,7 +71,9 @@ void Action ()
     else
       digitalWrite(RELAY, HIGH);
   }
-  if (STAvg < ThermalLimit)
+  
+  // Overheat Protection
+  if (STAvg < ThermalLimit - Threshold && SHAvg < ThermalLimit)
   {
     digitalWrite(OHP, LOW);
     Sleepiness = false;
