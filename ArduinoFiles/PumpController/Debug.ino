@@ -20,30 +20,16 @@ void DataStream ()
     break;
   }
 
-  if (SHAvg > STAvg + Threshold)
+  if (SHAvg >= STAvg + Threshold)
   {
-    switch (Cycle)
-    {
-      case 0: Active = "(~-~)";
-      break;
-      case 64: Active = "(~\\~)";
-      break;
-      case 128: Active = "(~|~)";
-      break;
-      case 192: Active = "(~/~)";
-      break;
-      case 256: Active = "(~-~)";
-      break;
-      case 320: Active = "(~\\~)";
-      break;
-      case 384: Active = "(~|~)";
-      break;
-      case 448: Active = "(~/~)";
-      break;
-    }
     PumpState = "On ";
   }
-  else
+  else if (SHAvg < STAvg + Threshold - Hysteresis)
+  {
+    PumpState = "Off";
+  }
+
+  if (PumpState == "Off")
   {
     switch (Cycle)
     {
@@ -64,7 +50,28 @@ void DataStream ()
       case 448: Active = "(~~~)";
       break;
     }
-    PumpState = "Off";
+  }
+  else
+  {
+    switch (Cycle)
+    {
+      case 0: Active = "(~-~)";
+      break;
+      case 64: Active = "(~\\~)";
+      break;
+      case 128: Active = "(~|~)";
+      break;
+      case 192: Active = "(~/~)";
+      break;
+      case 256: Active = "(~-~)";
+      break;
+      case 320: Active = "(~\\~)";
+      break;
+      case 384: Active = "(~|~)";
+      break;
+      case 448: Active = "(~/~)";
+      break;
+    }
   }
   
   Serial.print ("Tank Temp.: ");
@@ -72,12 +79,19 @@ void DataStream ()
   if (STAvg < 10) Serial.print ("0");
   Serial.print (STAvg);
   Serial.print ("; ");
+  Serial.print ("Head Temp.: ");
+  if (SHAvg < 100) Serial.print ("0");
+  if (SHAvg < 10) Serial.print ("0");
+  Serial.print (SHAvg);
+  Serial.print ("; ");
   Serial.print ("Max Temp.: ");
   if (ThermalLimit < 100) Serial.print ("0");
   if (ThermalLimit < 10) Serial.print ("0");
   Serial.print (ThermalLimit);
   Serial.print (" >> ");
-  if (STAvg < ThermalLimit)
+  Serial.print (PumpState);
+  Serial.print (" ");
+  if (STAvg < ThermalLimit - Threshold && SHAvg < ThermalLimit)
   {
     Serial.print (Active);
     Sleepiness = false;
@@ -87,13 +101,6 @@ void DataStream ()
     Serial.print (Sleeping);
     Sleepiness = true;
   }
-  Serial.print (";   ");
-  Serial.print ("Head Temp.: ");
-  if (SHAvg < 100) Serial.print (" ");
-  if (SHAvg < 10) Serial.print (" ");
-  Serial.print (SHAvg);
-  Serial.print (" >> ");
-  Serial.print (PumpState);
   Serial.print (";   ");
   Serial.print ("Threshold: ");
   if (Threshold < 100) Serial.print (" ");

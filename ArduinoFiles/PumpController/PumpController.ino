@@ -1,6 +1,6 @@
 // This is an expansion of the solar tracker, for controlling a pump in case of a hydro-thermic system.
 // Couldn't fit all the tracking and pump control functionalities, and the user interface on 1 arduino, and none of us had megas to play with. We eventually agreed to put the tracking on 1 arduino, and the pump on the other since the pump is only necessary for a hydro-thermic system.
-// Version 0.1
+// Version 0.1.1
 
 // Pins
 int SPEED = 11; // Pump Speed (only for DC pump...)
