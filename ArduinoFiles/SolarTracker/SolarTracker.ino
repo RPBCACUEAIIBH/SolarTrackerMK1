@@ -1,6 +1,6 @@
 // Please note that this project was made for someone with an already existing system. Had to work with he already had rather then design everything from scratch!
 // Made primarily for Arduino nano and pro mini.(The new versions of pro mini that has A6 and A7 available, but if PWM speed control is not required any older version will do as those pins only read motor speed settings from pots...)
-// This is Version: 0.5.1 (not fully tested)
+// This is Version: 0.5.2 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -34,7 +34,7 @@ const byte DefaultT = 10; // Default Threshold (Only relevant if Sensitivity boo
 const byte DefaultNM = 100; // Default NightMode (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultLRS = 225; // Default Left-Right Speed (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultUDS = 225; // Default Up-Down Speed (Only relevant if Sensitivity boost is enabled!)
-const boolean Return = false; // Returns to end position. (Inactive by default! This feature relies on the limit switches to stop the relays! If the switches are non-existent/broken, this may cause erratic behavior, and/or burn something!)
+const boolean Return = true; // Returns to end position. (Active by default! Prevents meltdown that I didn't think of before with the newly added pump controller measuring temperatures...)
 const char ReturnDir = 'L'; // Which way to turn L/R when going to sleep.
 
 // Variables
@@ -81,7 +81,6 @@ void Boost (); // Enhancement
 
 void setup()
 {
-  delay (200);
   analogReference(DEFAULT);
   pinMode (LEFT, OUTPUT);
   pinMode (DOWN, OUTPUT);
