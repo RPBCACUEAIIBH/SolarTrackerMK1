@@ -1,5 +1,5 @@
 // This is slightly faster 3 sensor version, optimized for older arduino pro mini on which A6 and A7 isn't available, and for using least amount of parts which is more cost efficient for mass production...
-// This is Version: 0.3.1 (not fully tested)
+// This is Version: 0.3.2 (not fully tested)
 
 // Pins
 int SL = A0; // Left sensor
@@ -30,7 +30,7 @@ const boolean SensitivityBoost = true; // Sensitivity boost on/off (Advanced fea
 const byte DefaultT = 10; // Default Threshold (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultNM = 100; // Default NightMode (Only relevant if Sensitivity boost is enabled!)
 const byte DefaultS = 225; // Default Speed (Only relevant if Sensitivity boost is enabled!)
-const boolean Return = false; // Returns to end position. (Inactive by default! This feature relies on the limit switches to stop the relays! If the switches are non-existent/broken, this may cause erratic behavior, and/or burn something!)
+const boolean Return = true; // Returns to end position. (Active by default! Prevents meltdown that I didn't think of before with the newly added pump controller measuring temperatures...)
 const char ReturnDir = 'L'; // Which way to turn L/R when going to sleep.
 
 // Variables
@@ -74,7 +74,6 @@ void Boost (); // Enhancement
 
 void setup()
 {
-  delay (200);
   analogReference(DEFAULT);
   pinMode (LEFT, OUTPUT);
   pinMode (DOWN, OUTPUT);
