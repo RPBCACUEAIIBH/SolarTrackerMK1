@@ -1,0 +1,941 @@
+EESchema Schematic File Version 4
+LIBS:SolarTracker MK I-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 4
+Title "User Interface"
+Date "2019-07-20"
+Rev "1.0"
+Comp "Open Source Research Center"
+Comment1 "Source: http://osrc.rip"
+Comment2 "License: CC-BY 4.0"
+Comment3 "Author: Tibor Áser Veres"
+Comment4 "Project: Solar Tracker MK I  -  Designed partially with off the shelf modules for DIY-ers."
+$EndDescr
+$Comp
+L Device:R_POT_TRIM Sensitivity1
+U 1 1 5D43F0E3
+P 1500 1500
+F 0 "Sensitivity1" H 1430 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 1430 1545 50  0000 R CNN
+F 2 "" H 1500 1500 50  0001 C CNN
+F 3 "~" H 1500 1500 50  0001 C CNN
+	1    1500 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_POT_TRIM MinLight1
+U 1 1 5D4417D6
+P 3000 1500
+F 0 "MinLight1" H 2930 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 2930 1545 50  0000 R CNN
+F 2 "" H 3000 1500 50  0001 C CNN
+F 3 "~" H 3000 1500 50  0001 C CNN
+	1    3000 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_POT_TRIM LRSpeed1
+U 1 1 5D4420A3
+P 4500 1500
+F 0 "LRSpeed1" H 4430 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 4430 1545 50  0000 R CNN
+F 2 "" H 4500 1500 50  0001 C CNN
+F 3 "~" H 4500 1500 50  0001 C CNN
+	1    4500 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_POT_TRIM UDSpeed1
+U 1 1 5D4427EC
+P 6000 1500
+F 0 "UDSpeed1" H 5930 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 5930 1545 50  0000 R CNN
+F 2 "" H 6000 1500 50  0001 C CNN
+F 3 "~" H 6000 1500 50  0001 C CNN
+	1    6000 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+5V #PWR014
+U 1 1 5D44317E
+P 1500 1100
+F 0 "#PWR014" H 1500 950 50  0001 C CNN
+F 1 "+5V" H 1515 1273 50  0000 C CNN
+F 2 "" H 1500 1100 50  0001 C CNN
+F 3 "" H 1500 1100 50  0001 C CNN
+	1    1500 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR017
+U 1 1 5D44380E
+P 3000 1100
+F 0 "#PWR017" H 3000 950 50  0001 C CNN
+F 1 "+5V" H 3015 1273 50  0000 C CNN
+F 2 "" H 3000 1100 50  0001 C CNN
+F 3 "" H 3000 1100 50  0001 C CNN
+	1    3000 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR022
+U 1 1 5D443F9F
+P 4500 1100
+F 0 "#PWR022" H 4500 950 50  0001 C CNN
+F 1 "+5V" H 4515 1273 50  0000 C CNN
+F 2 "" H 4500 1100 50  0001 C CNN
+F 3 "" H 4500 1100 50  0001 C CNN
+	1    4500 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR028
+U 1 1 5D4446E0
+P 6000 1100
+F 0 "#PWR028" H 6000 950 50  0001 C CNN
+F 1 "+5V" H 6015 1273 50  0000 C CNN
+F 2 "" H 6000 1100 50  0001 C CNN
+F 3 "" H 6000 1100 50  0001 C CNN
+	1    6000 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6000 1100 6000 1350
+Wire Wire Line
+	6000 1650 6000 1900
+Wire Wire Line
+	4500 1900 4500 1650
+Wire Wire Line
+	4500 1350 4500 1100
+Wire Wire Line
+	3000 1100 3000 1350
+Wire Wire Line
+	3000 1650 3000 1900
+Wire Wire Line
+	1500 1900 1500 1650
+Wire Wire Line
+	1500 1350 1500 1100
+Wire Wire Line
+	4500 2400 4500 2200
+$Comp
+L Device:R R9
+U 1 1 5D448BEA
+P 4500 2050
+F 0 "R9" H 4570 2096 50  0000 L CNN
+F 1 "10K" H 4570 2005 50  0000 L CNN
+F 2 "" V 4430 2050 50  0001 C CNN
+F 3 "~" H 4500 2050 50  0001 C CNN
+	1    4500 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R12
+U 1 1 5D448F7B
+P 6000 2050
+F 0 "R12" H 6070 2096 50  0000 L CNN
+F 1 "10K" H 6070 2005 50  0000 L CNN
+F 2 "" V 5930 2050 50  0001 C CNN
+F 3 "~" H 6000 2050 50  0001 C CNN
+	1    6000 2050
+	1    0    0    -1  
+$EndComp
+Text HLabel 1250 1500 0    50   Output ~ 0
+Sensitivity
+Text HLabel 2750 1500 0    50   Output ~ 0
+MinLight
+Text HLabel 4250 1500 0    50   Output ~ 0
+LRSpeedP
+Text HLabel 5750 1500 0    50   Output ~ 0
+UDSpeedP
+Wire Wire Line
+	5750 1500 5850 1500
+Wire Wire Line
+	4350 1500 4250 1500
+Wire Wire Line
+	2850 1500 2750 1500
+Wire Wire Line
+	1350 1500 1250 1500
+$Comp
+L Device:R_POT_TRIM Difference1
+U 1 1 5D45565F
+P 7500 1500
+F 0 "Difference1" H 7430 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 7430 1545 50  0000 R CNN
+F 2 "" H 7500 1500 50  0001 C CNN
+F 3 "~" H 7500 1500 50  0001 C CNN
+	1    7500 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_POT_TRIM MaxTemp1
+U 1 1 5D455665
+P 9000 1500
+F 0 "MaxTemp1" H 8930 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 8930 1545 50  0000 R CNN
+F 2 "" H 9000 1500 50  0001 C CNN
+F 3 "~" H 9000 1500 50  0001 C CNN
+	1    9000 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_POT_TRIM PumpSpeed1
+U 1 1 5D45566B
+P 10500 1500
+F 0 "PumpSpeed1" H 10430 1454 50  0000 R CNN
+F 1 "10K(10 turn)" H 10430 1545 50  0000 R CNN
+F 2 "" H 10500 1500 50  0001 C CNN
+F 3 "~" H 10500 1500 50  0001 C CNN
+	1    10500 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+5V #PWR032
+U 1 1 5D455671
+P 7500 1100
+F 0 "#PWR032" H 7500 950 50  0001 C CNN
+F 1 "+5V" H 7515 1273 50  0000 C CNN
+F 2 "" H 7500 1100 50  0001 C CNN
+F 3 "" H 7500 1100 50  0001 C CNN
+	1    7500 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR039
+U 1 1 5D455677
+P 9000 1100
+F 0 "#PWR039" H 9000 950 50  0001 C CNN
+F 1 "+5V" H 9015 1273 50  0000 C CNN
+F 2 "" H 9000 1100 50  0001 C CNN
+F 3 "" H 9000 1100 50  0001 C CNN
+	1    9000 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR041
+U 1 1 5D45567D
+P 10500 1100
+F 0 "#PWR041" H 10500 950 50  0001 C CNN
+F 1 "+5V" H 10515 1273 50  0000 C CNN
+F 2 "" H 10500 1100 50  0001 C CNN
+F 3 "" H 10500 1100 50  0001 C CNN
+	1    10500 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10500 1900 10500 1650
+Wire Wire Line
+	10500 1350 10500 1100
+Wire Wire Line
+	9000 1100 9000 1350
+Wire Wire Line
+	7500 1900 7500 1650
+Wire Wire Line
+	7500 1350 7500 1100
+Wire Wire Line
+	10500 2400 10500 2200
+$Comp
+L Device:R R13
+U 1 1 5D45569C
+P 10500 2050
+F 0 "R13" H 10570 2096 50  0000 L CNN
+F 1 "10K" H 10570 2005 50  0000 L CNN
+F 2 "" V 10430 2050 50  0001 C CNN
+F 3 "~" H 10500 2050 50  0001 C CNN
+	1    10500 2050
+	1    0    0    -1  
+$EndComp
+Text HLabel 7250 1500 0    50   Output ~ 0
+Difference
+Text HLabel 8750 1500 0    50   Output ~ 0
+MaxTemp
+Text HLabel 10250 1500 0    50   Output ~ 0
+PumpSpeedP
+Wire Wire Line
+	10350 1500 10250 1500
+Wire Wire Line
+	8850 1500 8750 1500
+Wire Wire Line
+	7350 1500 7250 1500
+Wire Notes Line
+	6700 3000 6700 700 
+Text Notes 6800 2900 0    50   ~ 0
+Only applicable for hydro-thermic system!
+$Comp
+L Switch:SW_Push BTN4
+U 1 1 5D475501
+P 8650 5700
+F 0 "BTN4" H 8650 5985 50  0000 C CNN
+F 1 "SW_Push" H 8650 5894 50  0000 C CNN
+F 2 "" H 8650 5900 50  0001 C CNN
+F 3 "~" H 8650 5900 50  0001 C CNN
+	1    8650 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push BTN3
+U 1 1 5D4775EA
+P 8650 4900
+F 0 "BTN3" H 8650 5185 50  0000 C CNN
+F 1 "SW_Push" H 8650 5094 50  0000 C CNN
+F 2 "" H 8650 5100 50  0001 C CNN
+F 3 "~" H 8650 5100 50  0001 C CNN
+	1    8650 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push BTN2
+U 1 1 5D4788E1
+P 8650 4200
+F 0 "BTN2" H 8650 4485 50  0000 C CNN
+F 1 "SW_Push" H 8650 4394 50  0000 C CNN
+F 2 "" H 8650 4400 50  0001 C CNN
+F 3 "~" H 8650 4400 50  0001 C CNN
+	1    8650 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push BTN5
+U 1 1 5D479126
+P 9650 4900
+F 0 "BTN5" H 9650 5185 50  0000 C CNN
+F 1 "SW_Push" H 9650 5094 50  0000 C CNN
+F 2 "" H 9650 5100 50  0001 C CNN
+F 3 "~" H 9650 5100 50  0001 C CNN
+	1    9650 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push BTN1
+U 1 1 5D479B2C
+P 7650 4900
+F 0 "BTN1" H 7650 5185 50  0000 C CNN
+F 1 "SW_Push" H 7650 5094 50  0000 C CNN
+F 2 "" H 7650 5100 50  0001 C CNN
+F 3 "~" H 7650 5100 50  0001 C CNN
+	1    7650 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8850 4200 8950 4200
+Wire Wire Line
+	8950 4200 8950 4900
+Wire Wire Line
+	8850 5700 8950 5700
+Wire Wire Line
+	8850 4900 8950 4900
+Connection ~ 8950 4900
+Wire Wire Line
+	9450 4900 8950 4900
+Wire Wire Line
+	8950 4900 8950 5200
+Wire Wire Line
+	8950 5200 7950 5200
+Wire Wire Line
+	7950 5200 7950 4900
+Wire Wire Line
+	7950 4900 7850 4900
+Connection ~ 8950 5200
+Wire Wire Line
+	8950 5200 8950 5700
+Text HLabel 8350 4200 0    50   Output ~ 0
+ManUp
+Text HLabel 8350 4900 0    50   Output ~ 0
+Auto
+Text HLabel 7350 4900 0    50   Output ~ 0
+ManLeft
+Text HLabel 8350 5700 0    50   Output ~ 0
+ManDown
+Text HLabel 9950 4900 2    50   Output ~ 0
+ManRight
+Wire Wire Line
+	9950 4900 9850 4900
+Wire Wire Line
+	8450 4900 8350 4900
+Wire Wire Line
+	8350 4200 8450 4200
+Wire Wire Line
+	7450 4900 7350 4900
+Wire Wire Line
+	8350 5700 8450 5700
+$Comp
+L 74xx:74LS136 U1
+U 1 1 5D4948B3
+P 1800 4550
+F 0 "U1" H 1800 4233 50  0000 C CNN
+F 1 "74LS136" H 1800 4324 50  0000 C CNN
+F 2 "" H 1800 4550 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn54ls136.pdf" H 1800 4550 50  0001 C CNN
+	1    1800 4550
+	-1   0    0    1   
+$EndComp
+$Comp
+L 74xx:74LS136 U1
+U 2 1 5D495B6E
+P 4200 4550
+F 0 "U1" H 4200 4875 50  0000 C CNN
+F 1 "74LS136" H 4200 4784 50  0000 C CNN
+F 2 "" H 4200 4550 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn54ls136.pdf" H 4200 4550 50  0001 C CNN
+	2    4200 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS136 U1
+U 3 1 5D4979BF
+P 3000 3350
+F 0 "U1" V 3046 3170 50  0000 R CNN
+F 1 "74LS136" V 2955 3170 50  0000 R CNN
+F 2 "" H 3000 3350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn54ls136.pdf" H 3000 3350 50  0001 C CNN
+	3    3000 3350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:74LS136 U1
+U 4 1 5D499B00
+P 3000 5750
+F 0 "U1" V 2954 5938 50  0000 L CNN
+F 1 "74LS136" V 3045 5938 50  0000 L CNN
+F 2 "" H 3000 5750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn54ls136.pdf" H 3000 5750 50  0001 C CNN
+	4    3000 5750
+	0    1    1    0   
+$EndComp
+$Comp
+L 74xx:74LS136 U1
+U 5 1 5D49AE61
+P 6150 4600
+F 0 "U1" H 6380 4646 50  0000 L CNN
+F 1 "74LS136" H 6380 4555 50  0000 L CNN
+F 2 "" H 6150 4600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn54ls136.pdf" H 6150 4600 50  0001 C CNN
+	5    6150 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR030
+U 1 1 5D4A9445
+P 6150 3950
+F 0 "#PWR030" H 6150 3800 50  0001 C CNN
+F 1 "+5V" H 6165 4123 50  0000 C CNN
+F 2 "" H 6150 3950 50  0001 C CNN
+F 3 "" H 6150 3950 50  0001 C CNN
+	1    6150 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 3950 6150 4050
+Wire Wire Line
+	3100 3650 3100 4550
+Wire Wire Line
+	2900 5450 2900 4550
+Text HLabel 3800 4450 0    50   Input ~ 0
+Right
+Text HLabel 2900 3750 3    50   Input ~ 0
+Up
+Text HLabel 3100 5350 1    50   Input ~ 0
+Down
+Text HLabel 2200 4650 2    50   Input ~ 0
+Left
+Wire Wire Line
+	2900 3650 2900 3750
+Wire Wire Line
+	2200 4650 2100 4650
+Wire Wire Line
+	3100 5450 3100 5350
+Wire Wire Line
+	3900 4450 3800 4450
+$Comp
+L Device:R R5
+U 1 1 5D51B2F6
+P 1400 5300
+F 0 "R5" H 1470 5346 50  0000 L CNN
+F 1 "220" H 1470 5255 50  0000 L CNN
+F 2 "" V 1330 5300 50  0001 C CNN
+F 3 "~" H 1400 5300 50  0001 C CNN
+	1    1400 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 5D51C767
+P 2500 3300
+F 0 "R6" H 2570 3346 50  0000 L CNN
+F 1 "220" H 2570 3255 50  0000 L CNN
+F 2 "" V 2430 3300 50  0001 C CNN
+F 3 "~" H 2500 3300 50  0001 C CNN
+	1    2500 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R10
+U 1 1 5D51D9EC
+P 4650 5300
+F 0 "R10" H 4720 5346 50  0000 L CNN
+F 1 "220" H 4720 5255 50  0000 L CNN
+F 2 "" V 4580 5300 50  0001 C CNN
+F 3 "~" H 4650 5300 50  0001 C CNN
+	1    4650 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R7
+U 1 1 5D529A31
+P 3000 6800
+F 0 "R7" H 3070 6846 50  0000 L CNN
+F 1 "220" H 3070 6755 50  0000 L CNN
+F 2 "" V 2930 6800 50  0001 C CNN
+F 3 "~" H 3000 6800 50  0001 C CNN
+	1    3000 6800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 3450 2500 3550
+Wire Wire Line
+	4650 5550 4650 5450
+Wire Wire Line
+	1400 5550 1400 5450
+Wire Wire Line
+	3000 7050 3000 6950
+$Comp
+L Device:LED D3
+U 1 1 5D543BCC
+P 3000 6350
+F 0 "D3" V 3039 6233 50  0000 R CNN
+F 1 "LED" V 2948 6233 50  0000 R CNN
+F 2 "" H 3000 6350 50  0001 C CNN
+F 3 "~" H 3000 6350 50  0001 C CNN
+	1    3000 6350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5D544AA0
+P 1400 4850
+F 0 "D1" V 1439 4733 50  0000 R CNN
+F 1 "LED" V 1348 4733 50  0000 R CNN
+F 2 "" H 1400 4850 50  0001 C CNN
+F 3 "~" H 1400 4850 50  0001 C CNN
+	1    1400 4850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D4
+U 1 1 5D546166
+P 4650 4850
+F 0 "D4" V 4689 4733 50  0000 R CNN
+F 1 "LED" V 4598 4733 50  0000 R CNN
+F 2 "" H 4650 4850 50  0001 C CNN
+F 3 "~" H 4650 4850 50  0001 C CNN
+	1    4650 4850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D2
+U 1 1 5D5468C1
+P 2750 2950
+F 0 "D2" H 2743 3166 50  0000 C CNN
+F 1 "LED" H 2743 3075 50  0000 C CNN
+F 2 "" H 2750 2950 50  0001 C CNN
+F 3 "~" H 2750 2950 50  0001 C CNN
+	1    2750 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 3050 3000 2950
+Wire Wire Line
+	3000 2950 2900 2950
+Wire Wire Line
+	2600 2950 2500 2950
+Wire Wire Line
+	2500 2950 2500 3150
+Wire Wire Line
+	1400 5150 1400 5000
+Wire Wire Line
+	1400 4700 1400 4550
+Wire Wire Line
+	1400 4550 1500 4550
+Wire Wire Line
+	3000 6650 3000 6500
+Wire Wire Line
+	3000 6200 3000 6050
+Wire Wire Line
+	4650 5150 4650 5000
+Wire Wire Line
+	4650 4700 4650 4550
+Wire Wire Line
+	4650 4550 4500 4550
+$Comp
+L Device:C C1
+U 1 1 5D599DA2
+P 5550 4650
+F 0 "C1" H 5665 4696 50  0000 L CNN
+F 1 "100nF" H 5665 4605 50  0000 L CNN
+F 2 "" H 5588 4500 50  0001 C CNN
+F 3 "~" H 5550 4650 50  0001 C CNN
+	1    5550 4650
+	1    0    0    -1  
+$EndComp
+Connection ~ 6150 4050
+Wire Wire Line
+	6150 4050 6150 4100
+Connection ~ 6150 5200
+Wire Wire Line
+	6150 5200 6150 5100
+Wire Wire Line
+	6150 5200 6150 5300
+Wire Wire Line
+	5550 5200 5550 4800
+Wire Wire Line
+	5550 5200 6150 5200
+Wire Wire Line
+	5550 4500 5550 4050
+Wire Wire Line
+	5550 4050 6150 4050
+$Comp
+L Device:R R11
+U 1 1 5D5C458B
+P 5450 6800
+F 0 "R11" H 5520 6846 50  0000 L CNN
+F 1 "220" H 5520 6755 50  0000 L CNN
+F 2 "" V 5380 6800 50  0001 C CNN
+F 3 "~" H 5450 6800 50  0001 C CNN
+	1    5450 6800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5450 7050 5450 6950
+$Comp
+L Device:LED D5
+U 1 1 5D5C4598
+P 5450 6350
+F 0 "D5" V 5489 6233 50  0000 R CNN
+F 1 "LED" V 5398 6233 50  0000 R CNN
+F 2 "" H 5450 6350 50  0001 C CNN
+F 3 "~" H 5450 6350 50  0001 C CNN
+	1    5450 6350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5450 6650 5450 6500
+Text HLabel 5350 6100 0    50   Input ~ 0
+Sleep
+Wire Wire Line
+	5350 6100 5450 6100
+Wire Wire Line
+	5450 6100 5450 6200
+$Comp
+L Jumper:Jumper_3_Bridged12 JP1
+U 1 1 5D5D819B
+P 4100 3450
+F 0 "JP1" V 4054 3516 50  0000 L CNN
+F 1 "InvertLEDs" V 4145 3516 50  0000 L CNN
+F 2 "" H 4100 3450 50  0001 C CNN
+F 3 "~" H 4100 3450 50  0001 C CNN
+	1    4100 3450
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR020
+U 1 1 5D5DB428
+P 4100 3100
+F 0 "#PWR020" H 4100 2950 50  0001 C CNN
+F 1 "+5V" H 4115 3273 50  0000 C CNN
+F 2 "" H 4100 3100 50  0001 C CNN
+F 3 "" H 4100 3100 50  0001 C CNN
+	1    4100 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R8
+U 1 1 5D5DB9FA
+P 3400 4100
+F 0 "R8" H 3470 4146 50  0000 L CNN
+F 1 "220" H 3470 4055 50  0000 L CNN
+F 2 "" V 3330 4100 50  0001 C CNN
+F 3 "~" H 3400 4100 50  0001 C CNN
+	1    3400 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 4550 3400 4550
+Wire Wire Line
+	3400 4550 3400 4250
+Connection ~ 3100 4550
+Wire Wire Line
+	3900 4650 3400 4650
+Wire Wire Line
+	3400 4650 3400 4550
+Connection ~ 3400 4550
+Wire Wire Line
+	2900 4550 3100 4550
+Wire Wire Line
+	2100 4450 2900 4450
+Wire Wire Line
+	2900 4450 2900 4550
+Connection ~ 2900 4550
+Wire Wire Line
+	3400 3950 3400 3450
+Wire Wire Line
+	3400 3450 3950 3450
+Wire Wire Line
+	4100 3100 4100 3200
+Wire Wire Line
+	4100 3700 4100 3850
+Text Notes 4200 3300 0    50   ~ 0
+If all the LEDs are on while stopped, change the jumper position to flip the indicator. (Affected by the LowActiveRelays constant!)
+$Comp
+L Device:R R14
+U 1 1 5D6C3FAA
+P 10500 3800
+F 0 "R14" H 10570 3846 50  0000 L CNN
+F 1 "220" H 10570 3755 50  0000 L CNN
+F 2 "" V 10430 3800 50  0001 C CNN
+F 3 "~" H 10500 3800 50  0001 C CNN
+	1    10500 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10500 4050 10500 3950
+$Comp
+L Device:LED D6
+U 1 1 5D6C3FB7
+P 10500 3350
+F 0 "D6" V 10539 3233 50  0000 R CNN
+F 1 "LED" V 10448 3233 50  0000 R CNN
+F 2 "" H 10500 3350 50  0001 C CNN
+F 3 "~" H 10500 3350 50  0001 C CNN
+	1    10500 3350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10500 3650 10500 3500
+Text HLabel 10400 3100 0    50   Input ~ 0
+Pump
+Wire Wire Line
+	10400 3100 10500 3100
+Wire Wire Line
+	10500 3100 10500 3200
+Wire Notes Line
+	9900 4450 9900 3000
+Wire Notes Line
+	9900 3000 6700 3000
+Text Notes 550  600  0    50   ~ 0
+This sheet contains all the indicators, and controls.
+Text Notes 550  700  0    50   ~ 0
+You may wanna put these on a separate board from the rest. It should be an easily accessible, well organized and labeled interface.
+Text Notes 5800 6450 0    50   ~ 0
+<-- When this LED is on, there is not enough light, or it reached max temperature.\nWhen it blinks, it's in manual mode.
+Wire Notes Line
+	6650 800  6650 2800
+Wire Notes Line
+	6650 2800 3700 2800
+Wire Notes Line
+	3700 2800 3700 800 
+Wire Notes Line
+	3700 800  6650 800 
+Text Notes 3750 2750 0    50   ~ 0
+Optional, only required for speed control.
+Text Notes 10050 2800 0    50   ~ 0
+Optional, only required\nfor speed control.
+Wire Notes Line
+	11150 700  11150 4450
+Wire Notes Line
+	6700 700  11150 700 
+Wire Notes Line
+	9900 4450 11150 4450
+Wire Notes Line
+	11100 800  9650 800 
+Wire Notes Line
+	9650 2850 11100 2850
+Wire Notes Line
+	9650 800  9650 2850
+Wire Notes Line
+	11100 800  11100 2850
+Wire Wire Line
+	6000 2400 6000 2200
+Wire Wire Line
+	8950 5800 8950 5700
+Connection ~ 8950 5700
+Wire Wire Line
+	9000 1650 9000 1900
+$Comp
+L Local:GND_Source #PWR0124
+U 1 1 5DE610E7
+P 1500 1900
+F 0 "#PWR0124" H 1500 1600 50  0001 C CNN
+F 1 "GND_Source" H 1500 1687 50  0000 C CNN
+F 2 "" H 1500 1900 50  0001 C CNN
+F 3 "" H 1500 1900 50  0001 C CNN
+	1    1500 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR018
+U 1 1 5D365860
+P 3000 1900
+F 0 "#PWR018" H 3000 1600 50  0001 C CNN
+F 1 "GND_Source" H 3000 1687 50  0000 C CNN
+F 2 "" H 3000 1900 50  0001 C CNN
+F 3 "" H 3000 1900 50  0001 C CNN
+	1    3000 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR023
+U 1 1 5D365FD4
+P 4500 2400
+F 0 "#PWR023" H 4500 2100 50  0001 C CNN
+F 1 "GND_Source" H 4500 2187 50  0000 C CNN
+F 2 "" H 4500 2400 50  0001 C CNN
+F 3 "" H 4500 2400 50  0001 C CNN
+	1    4500 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR027
+U 1 1 5D366673
+P 6000 2400
+F 0 "#PWR027" H 6000 2100 50  0001 C CNN
+F 1 "GND_Source" H 6000 2187 50  0000 C CNN
+F 2 "" H 6000 2400 50  0001 C CNN
+F 3 "" H 6000 2400 50  0001 C CNN
+	1    6000 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR031
+U 1 1 5D366D79
+P 7500 1900
+F 0 "#PWR031" H 7500 1600 50  0001 C CNN
+F 1 "GND_Source" H 7500 1687 50  0000 C CNN
+F 2 "" H 7500 1900 50  0001 C CNN
+F 3 "" H 7500 1900 50  0001 C CNN
+	1    7500 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR034
+U 1 1 5D36736A
+P 9000 1900
+F 0 "#PWR034" H 9000 1600 50  0001 C CNN
+F 1 "GND_Source" H 9000 1687 50  0000 C CNN
+F 2 "" H 9000 1900 50  0001 C CNN
+F 3 "" H 9000 1900 50  0001 C CNN
+	1    9000 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR035
+U 1 1 5D367961
+P 10500 2400
+F 0 "#PWR035" H 10500 2100 50  0001 C CNN
+F 1 "GND_Source" H 10500 2187 50  0000 C CNN
+F 2 "" H 10500 2400 50  0001 C CNN
+F 3 "" H 10500 2400 50  0001 C CNN
+	1    10500 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR037
+U 1 1 5D3680C9
+P 10500 4050
+F 0 "#PWR037" H 10500 3750 50  0001 C CNN
+F 1 "GND_Source" H 10500 3837 50  0000 C CNN
+F 2 "" H 10500 4050 50  0001 C CNN
+F 3 "" H 10500 4050 50  0001 C CNN
+	1    10500 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR033
+U 1 1 5D3688AF
+P 8950 5800
+F 0 "#PWR033" H 8950 5500 50  0001 C CNN
+F 1 "GND_Source" H 8950 5587 50  0000 C CNN
+F 2 "" H 8950 5800 50  0001 C CNN
+F 3 "" H 8950 5800 50  0001 C CNN
+	1    8950 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR029
+U 1 1 5D3690AB
+P 6150 5300
+F 0 "#PWR029" H 6150 5000 50  0001 C CNN
+F 1 "GND_Source" H 6150 5087 50  0000 C CNN
+F 2 "" H 6150 5300 50  0001 C CNN
+F 3 "" H 6150 5300 50  0001 C CNN
+	1    6150 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR026
+U 1 1 5D36980D
+P 5450 7050
+F 0 "#PWR026" H 5450 6750 50  0001 C CNN
+F 1 "GND_Source" H 5450 6837 50  0000 C CNN
+F 2 "" H 5450 7050 50  0001 C CNN
+F 3 "" H 5450 7050 50  0001 C CNN
+	1    5450 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR025
+U 1 1 5D36C4F2
+P 4650 5550
+F 0 "#PWR025" H 4650 5250 50  0001 C CNN
+F 1 "GND_Source" H 4650 5337 50  0000 C CNN
+F 2 "" H 4650 5550 50  0001 C CNN
+F 3 "" H 4650 5550 50  0001 C CNN
+	1    4650 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR019
+U 1 1 5D36CBE5
+P 3000 7050
+F 0 "#PWR019" H 3000 6750 50  0001 C CNN
+F 1 "GND_Source" H 3000 6837 50  0000 C CNN
+F 2 "" H 3000 7050 50  0001 C CNN
+F 3 "" H 3000 7050 50  0001 C CNN
+	1    3000 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR015
+U 1 1 5D36D2F6
+P 1400 5550
+F 0 "#PWR015" H 1400 5250 50  0001 C CNN
+F 1 "GND_Source" H 1400 5337 50  0000 C CNN
+F 2 "" H 1400 5550 50  0001 C CNN
+F 3 "" H 1400 5550 50  0001 C CNN
+	1    1400 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR016
+U 1 1 5D36D9BE
+P 2500 3550
+F 0 "#PWR016" H 2500 3250 50  0001 C CNN
+F 1 "GND_Source" H 2500 3337 50  0000 C CNN
+F 2 "" H 2500 3550 50  0001 C CNN
+F 3 "" H 2500 3550 50  0001 C CNN
+	1    2500 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR021
+U 1 1 5D36E225
+P 4100 3850
+F 0 "#PWR021" H 4100 3550 50  0001 C CNN
+F 1 "GND_Source" H 4100 3637 50  0000 C CNN
+F 2 "" H 4100 3850 50  0001 C CNN
+F 3 "" H 4100 3850 50  0001 C CNN
+	1    4100 3850
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

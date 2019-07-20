@@ -1,0 +1,618 @@
+EESchema Schematic File Version 4
+LIBS:SolarTracker MK I-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 4
+Title "Sensor Circuits"
+Date "2019-07-20"
+Rev "1.0"
+Comp "Open Source Research Center"
+Comment1 "Source: http://osrc.rip"
+Comment2 "License: CC-BY 4.0"
+Comment3 "Author: Tibor Áser Veres"
+Comment4 "Project: Solar Tracker MK I  -  Designed partially with off the shelf modules for DIY-ers."
+$EndDescr
+$Comp
+L Sensor_Optical:LDR03 R?
+U 1 1 5D3D385E
+P 7000 1550
+AR Path="/5D3D385E" Ref="R?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D385E" Ref="S3"  Part="1" 
+F 0 "S3" H 7070 1596 50  0000 L CNN
+F 1 "LDR03" H 7070 1505 50  0000 L CNN
+F 2 "OptoDevice:R_LDR_10x8.5mm_P7.6mm_Vertical" V 7175 1550 50  0001 C CNN
+F 3 "http://www.elektronica-componenten.nl/WebRoot/StoreNL/Shops/61422969/54F1/BA0C/C664/31B9/2173/C0A8/2AB9/2AEF/LDR03IMP.pdf" H 7000 1500 50  0001 C CNN
+	1    7000 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_POT_TRIM RV?
+U 1 1 5D3D3864
+P 7000 2050
+AR Path="/5D3D3864" Ref="RV?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D3864" Ref="FAPot3"  Part="1" 
+F 0 "FAPot3" V 6885 2050 50  0000 C CNN
+F 1 "10K (10 turn)" V 6794 2050 50  0000 C CNN
+F 2 "" H 7000 2050 50  0001 C CNN
+F 3 "~" H 7000 2050 50  0001 C CNN
+	1    7000 2050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6850 2050 6700 2050
+$Comp
+L power:+5V #PWR?
+U 1 1 5D3D3871
+P 7000 1200
+AR Path="/5D3D3871" Ref="#PWR?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D3871" Ref="#PWR06"  Part="1" 
+F 0 "#PWR06" H 7000 1050 50  0001 C CNN
+F 1 "+5V" H 7015 1373 50  0000 C CNN
+F 2 "" H 7000 1200 50  0001 C CNN
+F 3 "" H 7000 1200 50  0001 C CNN
+	1    7000 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 1400 7000 1200
+$Comp
+L power:+5V #PWR?
+U 1 1 5D3D3878
+P 8500 1200
+AR Path="/5D3D3878" Ref="#PWR?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D3878" Ref="#PWR08"  Part="1" 
+F 0 "#PWR08" H 8500 1050 50  0001 C CNN
+F 1 "+5V" H 8515 1373 50  0000 C CNN
+F 2 "" H 8500 1200 50  0001 C CNN
+F 3 "" H 8500 1200 50  0001 C CNN
+	1    8500 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Sensor_Optical:LDR03 R?
+U 1 1 5D3D387E
+P 8500 1550
+AR Path="/5D3D387E" Ref="R?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D387E" Ref="S4"  Part="1" 
+F 0 "S4" H 8570 1596 50  0000 L CNN
+F 1 "LDR03" H 8570 1505 50  0000 L CNN
+F 2 "OptoDevice:R_LDR_10x8.5mm_P7.6mm_Vertical" V 8675 1550 50  0001 C CNN
+F 3 "http://www.elektronica-componenten.nl/WebRoot/StoreNL/Shops/61422969/54F1/BA0C/C664/31B9/2173/C0A8/2AB9/2AEF/LDR03IMP.pdf" H 8500 1500 50  0001 C CNN
+	1    8500 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_POT_TRIM RV?
+U 1 1 5D3D3884
+P 8500 2050
+AR Path="/5D3D3884" Ref="RV?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D3884" Ref="FAPot4"  Part="1" 
+F 0 "FAPot4" V 8385 2050 50  0000 C CNN
+F 1 "10K (10 turn)" V 8294 2050 50  0000 C CNN
+F 2 "" H 8500 2050 50  0001 C CNN
+F 3 "~" H 8500 2050 50  0001 C CNN
+	1    8500 2050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8200 2050 8350 2050
+Wire Wire Line
+	8500 1900 8500 1800
+Wire Wire Line
+	8500 1400 8500 1200
+$Comp
+L power:+5V #PWR?
+U 1 1 5D3D3893
+P 4000 1200
+AR Path="/5D3D3893" Ref="#PWR?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D3893" Ref="#PWR02"  Part="1" 
+F 0 "#PWR02" H 4000 1050 50  0001 C CNN
+F 1 "+5V" H 4015 1373 50  0000 C CNN
+F 2 "" H 4000 1200 50  0001 C CNN
+F 3 "" H 4000 1200 50  0001 C CNN
+	1    4000 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Sensor_Optical:LDR03 R?
+U 1 1 5D3D3899
+P 4000 1550
+AR Path="/5D3D3899" Ref="R?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D3899" Ref="S1"  Part="1" 
+F 0 "S1" H 4070 1596 50  0000 L CNN
+F 1 "LDR03" H 4070 1505 50  0000 L CNN
+F 2 "OptoDevice:R_LDR_10x8.5mm_P7.6mm_Vertical" V 4175 1550 50  0001 C CNN
+F 3 "http://www.elektronica-componenten.nl/WebRoot/StoreNL/Shops/61422969/54F1/BA0C/C664/31B9/2173/C0A8/2AB9/2AEF/LDR03IMP.pdf" H 4000 1500 50  0001 C CNN
+	1    4000 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_POT_TRIM RV?
+U 1 1 5D3D389F
+P 4000 2050
+AR Path="/5D3D389F" Ref="RV?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D389F" Ref="FAPot1"  Part="1" 
+F 0 "FAPot1" V 3885 2050 50  0000 C CNN
+F 1 "10K (10 turn)" V 3794 2050 50  0000 C CNN
+F 2 "" H 4000 2050 50  0001 C CNN
+F 3 "~" H 4000 2050 50  0001 C CNN
+	1    4000 2050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_POT_TRIM RV?
+U 1 1 5D3D38AB
+P 5500 2050
+AR Path="/5D3D38AB" Ref="RV?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38AB" Ref="FAPot2"  Part="1" 
+F 0 "FAPot2" V 5385 2050 50  0000 C CNN
+F 1 "10K (10 turn)" V 5294 2050 50  0000 C CNN
+F 2 "" H 5500 2050 50  0001 C CNN
+F 3 "~" H 5500 2050 50  0001 C CNN
+	1    5500 2050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Sensor_Optical:LDR03 R?
+U 1 1 5D3D38B1
+P 5500 1550
+AR Path="/5D3D38B1" Ref="R?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38B1" Ref="S2"  Part="1" 
+F 0 "S2" H 5570 1596 50  0000 L CNN
+F 1 "LDR03" H 5570 1505 50  0000 L CNN
+F 2 "OptoDevice:R_LDR_10x8.5mm_P7.6mm_Vertical" V 5675 1550 50  0001 C CNN
+F 3 "http://www.elektronica-componenten.nl/WebRoot/StoreNL/Shops/61422969/54F1/BA0C/C664/31B9/2173/C0A8/2AB9/2AEF/LDR03IMP.pdf" H 5500 1500 50  0001 C CNN
+	1    5500 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5D3D38B7
+P 5500 1200
+AR Path="/5D3D38B7" Ref="#PWR?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38B7" Ref="#PWR04"  Part="1" 
+F 0 "#PWR04" H 5500 1050 50  0001 C CNN
+F 1 "+5V" H 5515 1373 50  0000 C CNN
+F 2 "" H 5500 1200 50  0001 C CNN
+F 3 "" H 5500 1200 50  0001 C CNN
+	1    5500 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 2050 5350 2050
+Wire Wire Line
+	5500 1700 5500 1800
+Wire Wire Line
+	5500 1400 5500 1200
+Wire Wire Line
+	4000 1200 4000 1400
+Wire Wire Line
+	3850 2050 3700 2050
+$Comp
+L Transistor_BJT:BC847 Q?
+U 1 1 5D3D38C8
+P 6150 2100
+AR Path="/5D3D38C8" Ref="Q?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38C8" Ref="Q3"  Part="1" 
+F 0 "Q3" H 6341 2146 50  0000 L CNN
+F 1 "BC847" H 6341 2055 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 6350 2025 50  0001 L CIN
+F 3 "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657" H 6150 2100 50  0001 L CNN
+	1    6150 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6250 1800 6750 1800
+Wire Wire Line
+	7000 1700 7000 1800
+Connection ~ 7000 1800
+Wire Wire Line
+	7000 1800 7000 1900
+Wire Wire Line
+	6250 1900 6250 1800
+Wire Wire Line
+	6700 2050 6700 2400
+Wire Wire Line
+	6250 2300 6250 2400
+Wire Wire Line
+	6250 2400 6700 2400
+Connection ~ 6700 2400
+Wire Wire Line
+	6700 2400 6700 2600
+Wire Wire Line
+	8200 2050 8200 2450
+Wire Wire Line
+	3700 2050 3700 2450
+$Comp
+L Transistor_BJT:BC847 Q?
+U 1 1 5D3D38DA
+P 7650 2150
+AR Path="/5D3D38DA" Ref="Q?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38DA" Ref="Q4"  Part="1" 
+F 0 "Q4" H 7841 2196 50  0000 L CNN
+F 1 "BC847" H 7841 2105 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7850 2075 50  0001 L CIN
+F 3 "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657" H 7650 2150 50  0001 L CNN
+	1    7650 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7750 1950 7750 1800
+Wire Wire Line
+	7750 1800 8250 1800
+Connection ~ 8500 1800
+Wire Wire Line
+	8500 1800 8500 1700
+Wire Wire Line
+	7750 2350 7750 2450
+Wire Wire Line
+	7750 2450 8200 2450
+Connection ~ 8200 2450
+Wire Wire Line
+	8200 2450 8200 2600
+$Comp
+L Transistor_BJT:BC847 Q?
+U 1 1 5D3D38E8
+P 3150 2150
+AR Path="/5D3D38E8" Ref="Q?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38E8" Ref="Q1"  Part="1" 
+F 0 "Q1" H 3341 2196 50  0000 L CNN
+F 1 "BC847" H 3341 2105 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3350 2075 50  0001 L CIN
+F 3 "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657" H 3150 2150 50  0001 L CNN
+	1    3150 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 1700 4000 1800
+Wire Wire Line
+	3250 1950 3250 1800
+Wire Wire Line
+	3250 1800 3750 1800
+Connection ~ 4000 1800
+Wire Wire Line
+	4000 1800 4000 1900
+Wire Wire Line
+	3250 2350 3250 2450
+Wire Wire Line
+	3250 2450 3700 2450
+Connection ~ 3700 2450
+Wire Wire Line
+	3700 2450 3700 2600
+$Comp
+L Transistor_BJT:BC847 Q?
+U 1 1 5D3D38F7
+P 4650 2150
+AR Path="/5D3D38F7" Ref="Q?"  Part="1" 
+AR Path="/5D3AB2EA/5D3D38F7" Ref="Q2"  Part="1" 
+F 0 "Q2" H 4841 2196 50  0000 L CNN
+F 1 "BC847" H 4841 2105 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4850 2075 50  0001 L CIN
+F 3 "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657" H 4650 2150 50  0001 L CNN
+	1    4650 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 2050 5200 2450
+Wire Wire Line
+	4750 2350 4750 2450
+Wire Wire Line
+	4750 2450 5200 2450
+Connection ~ 5200 2450
+Wire Wire Line
+	5200 2450 5200 2550
+Wire Wire Line
+	4750 1950 4750 1800
+Wire Wire Line
+	4750 1800 5250 1800
+Connection ~ 5500 1800
+Wire Wire Line
+	5500 1800 5500 1900
+Text HLabel 6650 1650 0    50   Output ~ 0
+STop
+Text HLabel 8150 1650 0    50   Output ~ 0
+SBottom
+Text HLabel 3650 1650 0    50   Output ~ 0
+SLeft
+Wire Wire Line
+	6650 1650 6750 1650
+Wire Wire Line
+	6750 1650 6750 1800
+Connection ~ 6750 1800
+Wire Wire Line
+	6750 1800 7000 1800
+Wire Wire Line
+	8150 1650 8250 1650
+Wire Wire Line
+	8250 1650 8250 1800
+Connection ~ 8250 1800
+Wire Wire Line
+	8250 1800 8500 1800
+Wire Wire Line
+	3750 1800 3750 1650
+Wire Wire Line
+	3750 1650 3650 1650
+Connection ~ 3750 1800
+Wire Wire Line
+	3750 1800 4000 1800
+Wire Wire Line
+	5250 1800 5250 1650
+Wire Wire Line
+	5250 1650 5150 1650
+Connection ~ 5250 1800
+Wire Wire Line
+	5250 1800 5500 1800
+Text HLabel 5150 1650 0    50   Output ~ 0
+SRight
+$Comp
+L Device:R R1
+U 1 1 5D406A99
+P 2850 2400
+F 0 "R1" H 2920 2446 50  0000 L CNN
+F 1 "1K" H 2920 2355 50  0000 L CNN
+F 2 "" V 2780 2400 50  0001 C CNN
+F 3 "~" H 2850 2400 50  0001 C CNN
+	1    2850 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5D4075F1
+P 4350 2400
+F 0 "R2" H 4420 2446 50  0000 L CNN
+F 1 "1K" H 4420 2355 50  0000 L CNN
+F 2 "" V 4280 2400 50  0001 C CNN
+F 3 "~" H 4350 2400 50  0001 C CNN
+	1    4350 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 5D407B96
+P 5850 2350
+F 0 "R3" H 5920 2396 50  0000 L CNN
+F 1 "1K" H 5920 2305 50  0000 L CNN
+F 2 "" V 5780 2350 50  0001 C CNN
+F 3 "~" H 5850 2350 50  0001 C CNN
+	1    5850 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 5D407FD7
+P 7350 2400
+F 0 "R4" H 7420 2446 50  0000 L CNN
+F 1 "1K" H 7420 2355 50  0000 L CNN
+F 2 "" V 7280 2400 50  0001 C CNN
+F 3 "~" H 7350 2400 50  0001 C CNN
+	1    7350 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7350 2550 7350 2950
+Wire Wire Line
+	7350 2950 5850 2950
+Wire Wire Line
+	5850 2950 5850 2500
+Wire Wire Line
+	5850 2950 4350 2950
+Wire Wire Line
+	4350 2950 4350 2550
+Connection ~ 5850 2950
+Wire Wire Line
+	4350 2950 2850 2950
+Wire Wire Line
+	2850 2950 2850 2550
+Connection ~ 4350 2950
+Connection ~ 2850 2950
+Wire Wire Line
+	2600 2950 2850 2950
+Text HLabel 2600 2950 0    50   Input ~ 0
+Override
+Wire Wire Line
+	7450 2150 7350 2150
+Wire Wire Line
+	7350 2150 7350 2250
+Wire Wire Line
+	5850 2200 5850 2100
+Wire Wire Line
+	5850 2100 5950 2100
+Wire Wire Line
+	4350 2250 4350 2150
+Wire Wire Line
+	4350 2150 4450 2150
+Wire Wire Line
+	2950 2150 2850 2150
+Wire Wire Line
+	2850 2150 2850 2250
+Text Notes 2850 3150 0    50   ~ 0
+Q1-4 and R1-4 only required for hydro-thermic system for overheat protection.
+$Comp
+L Device:R_POT_TRIM FAPot?
+U 1 1 5D712E2D
+P 4750 5800
+AR Path="/5D712E2D" Ref="FAPot?"  Part="1" 
+AR Path="/5D3AB2EA/5D712E2D" Ref="FAPot6"  Part="1" 
+F 0 "FAPot6" V 4635 5800 50  0000 C CNN
+F 1 "10K (10 turn)" V 4544 5800 50  0000 C CNN
+F 2 "" H 4750 5800 50  0001 C CNN
+F 3 "~" H 4750 5800 50  0001 C CNN
+	1    4750 5800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4450 5800 4600 5800
+$Comp
+L power:+5V #PWR?
+U 1 1 5D73F310
+P 4750 4850
+AR Path="/5D73F310" Ref="#PWR?"  Part="1" 
+AR Path="/5D3AB2EA/5D73F310" Ref="#PWR038"  Part="1" 
+F 0 "#PWR038" H 4750 4700 50  0001 C CNN
+F 1 "+5V" H 4765 5023 50  0000 C CNN
+F 2 "" H 4750 4850 50  0001 C CNN
+F 3 "" H 4750 4850 50  0001 C CNN
+	1    4750 4850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4750 5050 4750 4850
+$Comp
+L Device:Thermistor_NTC TH2
+U 1 1 5D741432
+P 4750 5200
+F 0 "TH2" H 4848 5246 50  0000 L CNN
+F 1 "Thermistor_NTC" H 4848 5155 50  0000 L CNN
+F 2 "" H 4750 5250 50  0001 C CNN
+F 3 "~" H 4750 5250 50  0001 C CNN
+	1    4750 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4750 5350 4750 5500
+Wire Wire Line
+	4450 5800 4450 6350
+Text HLabel 4250 5500 0    50   Output ~ 0
+TankTemp
+Text HLabel 2250 5500 0    50   Output ~ 0
+HeadSensor
+Connection ~ 4750 5500
+Wire Wire Line
+	4750 5500 4750 5650
+Wire Wire Line
+	4250 5500 4750 5500
+$Comp
+L Device:R_POT_TRIM FAPot?
+U 1 1 5D75440D
+P 2750 5800
+AR Path="/5D75440D" Ref="FAPot?"  Part="1" 
+AR Path="/5D3AB2EA/5D75440D" Ref="FAPot5"  Part="1" 
+F 0 "FAPot5" V 2635 5800 50  0000 C CNN
+F 1 "10K (10 turn)" V 2544 5800 50  0000 C CNN
+F 2 "" H 2750 5800 50  0001 C CNN
+F 3 "~" H 2750 5800 50  0001 C CNN
+	1    2750 5800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2450 5800 2600 5800
+$Comp
+L power:+5V #PWR?
+U 1 1 5D75441A
+P 2750 4850
+AR Path="/5D75441A" Ref="#PWR?"  Part="1" 
+AR Path="/5D3AB2EA/5D75441A" Ref="#PWR036"  Part="1" 
+F 0 "#PWR036" H 2750 4700 50  0001 C CNN
+F 1 "+5V" H 2765 5023 50  0000 C CNN
+F 2 "" H 2750 4850 50  0001 C CNN
+F 3 "" H 2750 4850 50  0001 C CNN
+	1    2750 4850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 5050 2750 4850
+$Comp
+L Device:Thermistor_NTC TH1
+U 1 1 5D754421
+P 2750 5200
+F 0 "TH1" H 2848 5246 50  0000 L CNN
+F 1 "Thermistor_NTC" H 2848 5155 50  0000 L CNN
+F 2 "" H 2750 5250 50  0001 C CNN
+F 3 "~" H 2750 5250 50  0001 C CNN
+	1    2750 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 5350 2750 5500
+Wire Wire Line
+	2450 5800 2450 6350
+Connection ~ 2750 5500
+Wire Wire Line
+	2750 5500 2750 5650
+Wire Wire Line
+	2250 5500 2750 5500
+Wire Notes Line
+	1250 4250 6250 4250
+Wire Notes Line
+	6250 4250 6250 7000
+Wire Notes Line
+	6250 7000 1250 7000
+Wire Notes Line
+	1250 7000 1250 4250
+Text Notes 1350 6900 0    50   ~ 0
+Only applicable for hydro-thermic system!
+NoConn ~ 2900 5800
+NoConn ~ 4900 5800
+NoConn ~ 8650 2050
+NoConn ~ 7150 2050
+NoConn ~ 5650 2050
+NoConn ~ 4150 2050
+$Comp
+L Local:GND_Source #PWR0114
+U 1 1 5DE3E792
+P 3700 2600
+F 0 "#PWR0114" H 3700 2300 50  0001 C CNN
+F 1 "GND_Source" H 3700 2387 50  0000 C CNN
+F 2 "" H 3700 2600 50  0001 C CNN
+F 3 "" H 3700 2600 50  0001 C CNN
+	1    3700 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR011
+U 1 1 5D34EE5C
+P 5200 2550
+F 0 "#PWR011" H 5200 2250 50  0001 C CNN
+F 1 "GND_Source" H 5200 2337 50  0000 C CNN
+F 2 "" H 5200 2550 50  0001 C CNN
+F 3 "" H 5200 2550 50  0001 C CNN
+	1    5200 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR012
+U 1 1 5D34F254
+P 6700 2600
+F 0 "#PWR012" H 6700 2300 50  0001 C CNN
+F 1 "GND_Source" H 6700 2387 50  0000 C CNN
+F 2 "" H 6700 2600 50  0001 C CNN
+F 3 "" H 6700 2600 50  0001 C CNN
+	1    6700 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR013
+U 1 1 5D34F74F
+P 8200 2600
+F 0 "#PWR013" H 8200 2300 50  0001 C CNN
+F 1 "GND_Source" H 8200 2387 50  0000 C CNN
+F 2 "" H 8200 2600 50  0001 C CNN
+F 3 "" H 8200 2600 50  0001 C CNN
+	1    8200 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR09
+U 1 1 5D34FC74
+P 4450 6350
+F 0 "#PWR09" H 4450 6050 50  0001 C CNN
+F 1 "GND_Source" H 4450 6137 50  0000 C CNN
+F 2 "" H 4450 6350 50  0001 C CNN
+F 3 "" H 4450 6350 50  0001 C CNN
+	1    4450 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Local:GND_Source #PWR07
+U 1 1 5D3501D0
+P 2450 6350
+F 0 "#PWR07" H 2450 6050 50  0001 C CNN
+F 1 "GND_Source" H 2450 6137 50  0000 C CNN
+F 2 "" H 2450 6350 50  0001 C CNN
+F 3 "" H 2450 6350 50  0001 C CNN
+	1    2450 6350
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

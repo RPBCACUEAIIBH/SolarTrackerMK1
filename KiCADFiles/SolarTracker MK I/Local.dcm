@@ -1,0 +1,26 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 12V_Source
+D Motor Voltage(OUTPUT pin! Not to be connected to output of a regulator!)
+$ENDCMP
+#
+$CMP Arduino_Nano_V3
+D Arduino Nano v3.x
+K Arduino nano microcontroller module USB
+F http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf
+$ENDCMP
+#
+$CMP GND_Source
+D Motor Voltage(OUTPUT pin! Not to be connected to output of a regulator!)
+$ENDCMP
+#
+$CMP RelayModule(4C)
+D Off the shelf 4 channel relay module for prototyping.
+K reley, module
+$ENDCMP
+#
+$CMP VReg
+D Off the shelf DC voltage regulator(any type) for prototyping.
+$ENDCMP
+#
+#End Doc Library
